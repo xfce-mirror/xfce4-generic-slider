@@ -1,0 +1,14 @@
+Prerequisites
+=============
+
+  Xfce-generic-slider-plugin requires the Xfce panel and probably nothing else.
+
+Simple install procedure
+========================
+
+  To compile xfce-generic-slider-plugin, you should read over the Makefile to be sure it's correct for your system.
+  Specifically change PREFIX if you want it installed in /usr/local instead of /usr. Then make sure the plugin binary
+  and its desktop file are going to the right place. If you installed your other Xfce plugins with a package manager
+  use the package manager to query the file lists for them to find out where plugins and plugin desktop files should
+  go. If you compiled your other Xfce plugins from source, I certainly hope you already know. Once that's done, run
+  make, then run make install as root.
