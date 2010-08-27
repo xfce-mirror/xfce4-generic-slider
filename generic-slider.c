@@ -162,15 +162,15 @@ static void execute_command(char *command) {
 	arglist[num_args - 1] = NULL;
 	
 	/* Forks */
-	
+
 	pid = fork();
-	if (pid == -1) {
-		fprintf(stderr, "Could not fork a new process\n");
-	} else if (pid == 0) {
+	if (pid == 0) {
+		wait();
+	} else {
 		execvp(arglist[0], arglist);
 		perror("execvp");
-		_exit(-1);
 	}
+
 }
 
 static gint scroll_slider_cb(GtkWidget *widget, GdkEventScroll *event, GList *stupid_hack) {
