@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfcegui4/libxfcegui4.h>
@@ -165,7 +166,7 @@ static void execute_command(char *command) {
 
 	pid = fork();
 	if (pid == 0) {
-		wait();
+		wait(NULL);
 	} else {
 		execvp(arglist[0], arglist);
 		perror("execvp");
