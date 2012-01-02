@@ -1,5 +1,4 @@
 CC = gcc
-CFLAGS = -Wall -g
 MAKE = make
 INSTALL = install
 SED = sed
