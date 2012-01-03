@@ -18,7 +18,7 @@ typedef struct generic_slider {
 	char *sync_command;
 	/* Whether we show label, slider or both */
 	int mode;
-	/* Corresponds to the function that runs ever 100 ms */
+	/* Corresponds to the function that runs every 100 ms */
 	int timeout_id;
 	int description_denominator;
 	int adjust_denominator;
@@ -236,15 +236,18 @@ static gint adjust_slider_cb(GtkWidget *widget, GdkEventButton *event, GList *st
 	gdouble value_to_try;
 	Generic_Slider *generic_slider = stupid_hack -> data;
 	XfcePanelPlugin *plugin = stupid_hack -> next -> data;
+	GtkAllocation allocation;
 	
 	if (event -> button == 3) {
 		return FALSE;
 	}
 	
+	gtk_widget_get_allocation(widget, &allocation);
+	
 	if (xfce_panel_plugin_get_orientation(plugin) == GTK_ORIENTATION_VERTICAL) {
-		value_to_try = (event -> x)/(widget -> allocation.width);
+		value_to_try = (event -> x) / allocation.width;
 	} else {
-		value_to_try = 1.0 - ((event -> y)/(widget -> allocation.height));
+		value_to_try = 1.0 - ((event -> y) / allocation.height);
 	}
 	
 	if ((value_to_try >= 0.0) && (value_to_try <= 1.0)) {
@@ -534,9 +537,9 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_3), TRUE);
 	}
 	
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog) -> vbox), table, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog) -> vbox), hbox_5, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog) -> vbox), label_8, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), table, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), hbox_5, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), label_8, FALSE, FALSE, 0);
 	gtk_widget_show_all(dialog);
 }
 
