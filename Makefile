@@ -8,7 +8,7 @@ PKG_CONFIG = pkg-config
 DESTDIR =
 
 PREFIX = /usr
-PLUGINDIR = $(PREFIX)/lib/xfce4/xfce4/panel-plugins
+PLUGINDIR = $(PREFIX)/lib/xfce4/panel-plugins
 PLUGINDESKTOPDIR = $(PREFIX)/share/xfce4/panel-plugins
 
 LIBXFCE4PANEL_CFLAGS = `$(PKG_CONFIG) --cflags libxfce4panel-1.0 libxfce4ui-1`
