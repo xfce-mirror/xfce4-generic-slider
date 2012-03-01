@@ -781,9 +781,9 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	xfce_panel_plugin_menu_show_configure (plugin);
 	
 #if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
-	g_signal_connect(plugin, "orientation-changed", G_CALLBACK(generic_slider_orientation_changed), generic_slider);
+	g_signal_connect(plugin, "mode-changed", G_CALLBACK(generic_slider_orientation_changed), generic_slider);
 #else	
-	g_signal_connect(plugin, "mode-changed", G_CALLBACK(generic_slider_mode_changed), generic_slider);
+	g_signal_connect(plugin, "orientation-changed", G_CALLBACK(generic_slider_mode_changed), generic_slider);
 #endif
 	g_signal_connect(plugin, "configure-plugin", G_CALLBACK(generic_slider_properties_dialog), generic_slider);
 	g_signal_connect(plugin, "size-changed", G_CALLBACK(generic_slider_set_size), NULL);
