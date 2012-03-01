@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4util/libxfce4util.h>
 #define TIMEOUT 1000
 #define WIDTH 8
 

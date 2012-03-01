@@ -11,8 +11,8 @@ PREFIX = /usr
 PLUGINDIR = $(PREFIX)/lib/xfce4/panel-plugins
 PLUGINDESKTOPDIR = $(PREFIX)/share/xfce4/panel-plugins
 
-LIBXFCE4PANEL_CFLAGS = `$(PKG_CONFIG) --cflags libxfce4panel-1.0 libxfce4ui-1`
-LIBXFCE4PANEL_LIBS = `$(PKG_CONFIG) --libs libxfce4panel-1.0 libxfce4ui-1`
+LIBXFCE4PANEL_CFLAGS = `$(PKG_CONFIG) --cflags libxfce4panel-1.0 libxfce4ui-1 libxfce4util-1.0`
+LIBXFCE4PANEL_LIBS = `$(PKG_CONFIG) --libs libxfce4panel-1.0 libxfce4ui-1 libxfce4util-1.0`
 
 all: generic-slider.c
 	$(CC) $(CFLAGS) $(LIBXFCE4PANEL_CFLAGS) -c generic-slider.c
