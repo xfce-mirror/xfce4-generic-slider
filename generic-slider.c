@@ -4,7 +4,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfcegui4/libxfcegui4.h>
 #define TIMEOUT 1000
 #define WIDTH 8
 
@@ -543,41 +542,53 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_widget_show_all(dialog);
 }
 
-static void generic_slider_orientation_changed(XfcePanelPlugin *plugin, GtkOrientation orientation, Generic_Slider *generic_slider) {
+static void generic_slider_orientation_or_mode_changed(XfcePanelPlugin *plugin, gint rotate_label, gint vertical, Generic_Slider *generic_slider) {
 	GtkWidget *slider = generic_slider -> slider;
 	GtkWidget *label = generic_slider -> label;
 	GtkWidget *box = gtk_widget_get_ancestor(label, GTK_TYPE_BOX);
 	GtkWidget *event_box = gtk_widget_get_ancestor(slider, GTK_TYPE_EVENT_BOX);
 	GtkWidget *aligned_box = gtk_container_get_children(GTK_CONTAINER(event_box)) -> data;
-	GtkWidget *new_box;
 	
-	if (orientation == GTK_ORIENTATION_VERTICAL) {
-		new_box = gtk_vbox_new(FALSE, 0);
+	if (vertical) {
 		gtk_alignment_set(GTK_ALIGNMENT(aligned_box), 0.5, 0.5, 0.0, 1.0);
 		gtk_progress_bar_set_orientation(GTK_PROGRESS_BAR(slider), GTK_PROGRESS_LEFT_TO_RIGHT);
 		gtk_widget_set_size_request(slider, -1, WIDTH);
+		gtk_widget_set_size_request(GTK_WIDGET(plugin), xfce_panel_plugin_get_size(plugin), -1);
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(box), GTK_ORIENTATION_VERTICAL);
 	} else {
-		new_box = gtk_hbox_new(FALSE, 0);
 		gtk_alignment_set(GTK_ALIGNMENT(aligned_box), 0.5, 0.5, 1.0, 0.0);
 		gtk_progress_bar_set_orientation(GTK_PROGRESS_BAR(slider), GTK_PROGRESS_BOTTOM_TO_TOP);
 		gtk_widget_set_size_request(slider, WIDTH, -1);
+		gtk_widget_set_size_request(GTK_WIDGET(plugin), -1, xfce_panel_plugin_get_size(plugin));
+		gtk_orientable_set_orientation(GTK_ORIENTABLE(box), GTK_ORIENTATION_HORIZONTAL);
 	}
 	
-	gtk_widget_ref(label);
-	gtk_container_remove(GTK_CONTAINER(box), label);
-	gtk_box_pack_start(GTK_BOX(new_box), label, FALSE, FALSE, 0);
-	gtk_widget_ref(slider);
-	gtk_container_remove(GTK_CONTAINER(box), slider);
-	gtk_box_pack_start(GTK_BOX(new_box), slider, FALSE, FALSE, 0);
-	gtk_widget_destroy(box);
-	gtk_container_add(GTK_CONTAINER(aligned_box), new_box);
-	gtk_widget_show_all(aligned_box);
-	if ((generic_slider -> mode) == 1) {
-		gtk_widget_hide(label);
-	} else if ((generic_slider -> mode) == 2) {
-		gtk_widget_hide(slider);
+	if (rotate_label) {
+		if (vertical) {
+			gtk_label_set_angle(GTK_LABEL(label), 270);
+		} else {
+			gtk_label_set_angle(GTK_LABEL(label), 0);
+		}
 	}
 }
+
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+static void generic_slider_mode_changed(XfcePanelPlugin *plugin, XfcePanelPluginMode mode, Generic_Slider *generic_slider) {
+	if (mode != XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) {
+		generic_slider_orientation_or_mode_changed(plugin, 1, 1, generic_slider);
+	} else {
+		generic_slider_orientation_or_mode_changed(plugin, 1, 0, generic_slider);
+	}
+}
+#else
+static void generic_slider_orientation_changed(XfcePanelPlugin *plugin, GtkOrientation orientation, Generic_Slider *generic_slider) {
+	if (orientation == GTK_ORIENTATION_VERTICAL) {
+		generic_slider_orientation_or_mode_changed(plugin, 0, 1, generic_slider);
+	} else {
+		generic_slider_orientation_or_mode_changed(plugin, 0, 0, generic_slider);
+	}
+}
+#endif
 
 static gboolean generic_slider_set_size(XfcePanelPlugin *plugin, int size) {
 	if (xfce_panel_plugin_get_orientation(plugin) == GTK_ORIENTATION_HORIZONTAL) {
@@ -767,8 +778,13 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	gtk_container_add(GTK_CONTAINER(event_box), aligned_box);
 	
 	xfce_panel_plugin_menu_show_configure (plugin);
-	g_signal_connect(plugin, "configure-plugin", G_CALLBACK(generic_slider_properties_dialog), generic_slider);
+	
+#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 	g_signal_connect(plugin, "orientation-changed", G_CALLBACK(generic_slider_orientation_changed), generic_slider);
+#else	
+	g_signal_connect(plugin, "mode-changed", G_CALLBACK(generic_slider_mode_changed), generic_slider);
+#endif
+	g_signal_connect(plugin, "configure-plugin", G_CALLBACK(generic_slider_properties_dialog), generic_slider);
 	g_signal_connect(plugin, "size-changed", G_CALLBACK(generic_slider_set_size), NULL);
 	g_signal_connect(plugin, "free-data", G_CALLBACK(generic_slider_free_data), generic_slider);
 	g_signal_connect(plugin, "save", G_CALLBACK(generic_slider_write_rc_file), generic_slider);
