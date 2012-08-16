@@ -33,7 +33,9 @@ char *parse_command(char *primitive, int value, int delta) {
 	int numds = 0;
 	int numvs = 0;
 	int i;
-		
+	
+	if (!strcmp(primitive, "")) return "";
+	
 	for (i = 0; i < strlen(primitive); i++) {
 		if (primitive[i-1] == '%') {
 			if (primitive[i] == 'd') {
@@ -119,6 +121,8 @@ static void execute_command(char *command) {
 	int max_arg_length = 0;
 	int num_args = 2;
 	int i, j, k;
+	
+	if (!strcmp(command, "")) return;
 	
 	/* Allocates the arglist appropriately */
 	
