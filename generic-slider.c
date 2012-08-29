@@ -270,12 +270,98 @@ static gint adjust_slider_cb(GtkWidget *widget, GdkEventButton *event, GList *st
 	return FALSE;
 }
 
+static void generic_slider_write_rc_file(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
+	XfceRc *rc;
+	gchar *file;
+	gchar *color_string;
+	
+	/* Gdk colors sure have a lot of digits */
+	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> color.red, generic_slider -> color.green, generic_slider -> color.blue);
+	file = xfce_panel_plugin_save_location(plugin, TRUE);
+	
+	if (!file) {
+		return;
+	}
+	
+	rc = xfce_rc_simple_open(file, FALSE);
+	g_free(file);
+	
+	if (!rc) {
+		return;
+	}
+	
+	xfce_rc_write_entry(rc, "adjust_command", generic_slider -> adjust_command);
+	xfce_rc_write_entry(rc, "sync_command", generic_slider -> sync_command);
+	xfce_rc_write_entry(rc, "description", generic_slider -> description);
+	xfce_rc_write_entry(rc, "adjust_denominator", g_strdup_printf("%d", generic_slider -> adjust_denominator));
+	xfce_rc_write_entry(rc, "sync_denominator", g_strdup_printf("%d", generic_slider -> sync_denominator));
+	xfce_rc_write_entry(rc, "description_denominator", g_strdup_printf("%d", generic_slider -> description_denominator));
+	xfce_rc_write_entry(rc, "mode",  g_strdup_printf("%d", generic_slider -> mode));
+	xfce_rc_write_entry(rc, "color", color_string);
+	xfce_rc_close(rc);
+}
+
+static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
+	XfceRc *rc;
+	gchar *file;
+	gchar *tmp;
+	gchar *color_string;
+	
+	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> default_color.red, generic_slider -> default_color.green, generic_slider -> default_color.blue);
+	file = xfce_panel_plugin_lookup_rc_file(plugin);
+	if (file != NULL) {
+		rc = xfce_rc_simple_open(file, TRUE);
+		g_free(file);
+		
+		if (rc != NULL) {
+			tmp = xfce_rc_read_entry(rc, "adjust_command", "");
+			if (tmp != NULL) {
+				generic_slider -> adjust_command = g_strdup(tmp);
+			}
+			tmp = xfce_rc_read_entry(rc, "sync_command", "");
+			if (tmp != NULL) {
+				generic_slider -> sync_command = g_strdup(tmp);
+			}
+			tmp = xfce_rc_read_entry(rc, "description", "");
+			if (tmp != NULL) {
+				generic_slider -> description = g_strdup(tmp);
+			}
+			tmp = xfce_rc_read_entry(rc, "adjust_denominator", "100");
+			if (tmp != NULL) {
+				generic_slider -> adjust_denominator = (int) g_strtod(g_strdup(tmp), NULL);
+			}
+			tmp = xfce_rc_read_entry(rc, "sync_denominator", "100");
+			if (tmp != NULL) {
+				generic_slider -> sync_denominator = (int) g_strtod(g_strdup(tmp), NULL);
+			}
+			tmp = xfce_rc_read_entry(rc, "description_denominator", "100");
+			if (tmp != NULL) {
+				generic_slider -> description_denominator = (int) g_strtod(g_strdup(tmp), NULL);
+			}
+			tmp = xfce_rc_read_entry(rc, "mode", "0");
+			if (tmp != NULL) {
+				generic_slider -> mode = (int) g_strtod(g_strdup(tmp) , NULL);
+			}
+			tmp = xfce_rc_read_entry(rc, "color", color_string);
+			if (tmp != NULL) {
+				gdk_color_parse(tmp, &(generic_slider -> color));
+			}
+			xfce_rc_close(rc);
+		}
+	}
+	
+	generic_slider -> timeout_id = g_timeout_add(TIMEOUT, (GtkFunction)timer_cb, generic_slider);
+	generic_slider -> active = 1;
+}
+
 static void generic_slider_properties_dialog_response(GtkWidget *dialog, gint response, GList *stupid_hack) {
 	Generic_Slider *generic_slider = stupid_hack -> data;
 	XfcePanelPlugin *plugin = stupid_hack -> next -> data;
 
 	xfce_panel_plugin_unblock_menu(plugin);
 	gtk_widget_destroy(dialog);
+
+	generic_slider_write_rc_file(plugin, generic_slider);
 	generic_slider -> active = 1;
 }
 
@@ -644,90 +730,6 @@ static void generic_slider_free_data(XfcePanelPlugin *plugin, Generic_Slider *ge
 		free(generic_slider -> description);
 	}
 	free(generic_slider);
-}
-
-static void generic_slider_write_rc_file(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
-	XfceRc *rc;
-	gchar *file;
-	gchar *color_string;
-	
-	/* Gdk colors sure have a lot of digits */
-	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> color.red, generic_slider -> color.green, generic_slider -> color.blue);
-	file = xfce_panel_plugin_save_location(plugin, TRUE);
-	
-	if (!file) {
-		return;
-	}
-	
-	rc = xfce_rc_simple_open(file, FALSE);
-	g_free(file);
-	
-	if (!rc) {
-		return;
-	}
-	
-	xfce_rc_write_entry(rc, "adjust_command", generic_slider -> adjust_command);
-	xfce_rc_write_entry(rc, "sync_command", generic_slider -> sync_command);
-	xfce_rc_write_entry(rc, "description", generic_slider -> description);
-	xfce_rc_write_entry(rc, "adjust_denominator", g_strdup_printf("%d", generic_slider -> adjust_denominator));
-	xfce_rc_write_entry(rc, "sync_denominator", g_strdup_printf("%d", generic_slider -> sync_denominator));
-	xfce_rc_write_entry(rc, "description_denominator", g_strdup_printf("%d", generic_slider -> description_denominator));
-	xfce_rc_write_entry(rc, "mode",  g_strdup_printf("%d", generic_slider -> mode));
-	xfce_rc_write_entry(rc, "color", color_string);
-	xfce_rc_close(rc);
-}
-
-static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
-	XfceRc *rc;
-	gchar *file;
-	gchar *tmp;
-	gchar *color_string;
-	
-	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> default_color.red, generic_slider -> default_color.green, generic_slider -> default_color.blue);
-	file = xfce_panel_plugin_lookup_rc_file(plugin);
-	if (file != NULL) {
-		rc = xfce_rc_simple_open(file, TRUE);
-		g_free(file);
-		
-		if (rc != NULL) {
-			tmp = xfce_rc_read_entry(rc, "adjust_command", "");
-			if (tmp != NULL) {
-				generic_slider -> adjust_command = g_strdup(tmp);
-			}
-			tmp = xfce_rc_read_entry(rc, "sync_command", "");
-			if (tmp != NULL) {
-				generic_slider -> sync_command = g_strdup(tmp);
-			}
-			tmp = xfce_rc_read_entry(rc, "description", "");
-			if (tmp != NULL) {
-				generic_slider -> description = g_strdup(tmp);
-			}
-			tmp = xfce_rc_read_entry(rc, "adjust_denominator", "100");
-			if (tmp != NULL) {
-				generic_slider -> adjust_denominator = (int) g_strtod(g_strdup(tmp), NULL);
-			}
-			tmp = xfce_rc_read_entry(rc, "sync_denominator", "100");
-			if (tmp != NULL) {
-				generic_slider -> sync_denominator = (int) g_strtod(g_strdup(tmp), NULL);
-			}
-			tmp = xfce_rc_read_entry(rc, "description_denominator", "100");
-			if (tmp != NULL) {
-				generic_slider -> description_denominator = (int) g_strtod(g_strdup(tmp), NULL);
-			}
-			tmp = xfce_rc_read_entry(rc, "mode", "0");
-			if (tmp != NULL) {
-				generic_slider -> mode = (int) g_strtod(g_strdup(tmp) , NULL);
-			}
-			tmp = xfce_rc_read_entry(rc, "color", color_string);
-			if (tmp != NULL) {
-				gdk_color_parse(tmp, &(generic_slider -> color));
-			}
-			xfce_rc_close(rc);
-		}
-	}
-	
-	generic_slider -> timeout_id = g_timeout_add(TIMEOUT, (GtkFunction)timer_cb, generic_slider);
-	generic_slider -> active = 1;
 }
 
 static void generic_slider_construct(XfcePanelPlugin *plugin) {
