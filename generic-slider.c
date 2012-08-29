@@ -87,12 +87,12 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 		}
 		
 		/* For some reason a 2 gets stuck onto the end */
-		if (((double) new_value) != (generic_slider -> sync_denominator)) {
+		if (new_value != (generic_slider -> sync_denominator)) {
 			new_value -= 2;
 			new_value /= 10;
 		}
 		
-		if (((double) new_value) <= (generic_slider -> sync_denominator)) {
+		if (new_value <= (generic_slider -> sync_denominator)) {
 			generic_slider -> value = ((double) new_value) / ((double) generic_slider -> sync_denominator);
 			gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(generic_slider -> slider), generic_slider -> value);
 			
