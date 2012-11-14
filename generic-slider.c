@@ -34,7 +34,12 @@ char *parse_command(char *primitive, int value, int delta) {
 	int numvs = 0;
 	int i;
 	
-	if (!strcmp(primitive, "")) return "";
+	if (!strcmp(primitive, "")) {
+		/* Functions that free this string later need something to free */
+		char *command = malloc(sizeof(char));
+		strcpy(command, "");
+		return command;
+	}
 	
 	for (i = 0; i < strlen(primitive); i++) {
 		if (primitive[i-1] == '%') {
@@ -232,6 +237,7 @@ static gint scroll_slider_cb(GtkWidget *widget, GdkEventScroll *event, GList *st
 	gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 	gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 	gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
+	free(label_text);
 	return TRUE;
 }
 
@@ -265,6 +271,7 @@ static gint adjust_slider_cb(GtkWidget *widget, GdkEventButton *event, GList *st
 		gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
+		free(label_text);
 	}
 	
 	return FALSE;
@@ -474,6 +481,7 @@ static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *gen
 		gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
+		free(label_text);
 	}
 }
 
@@ -813,6 +821,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	gtk_label_set_text(GTK_LABEL(label), label_text);
 	gtk_widget_set_tooltip_text(slider, label_text);
 	gtk_widget_set_tooltip_text(label, label_text);
+	free(label_text);
 	
 	if ((generic_slider -> mode) == 1) {
 		gtk_widget_hide(label);
