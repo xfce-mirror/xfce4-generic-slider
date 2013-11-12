@@ -316,8 +316,8 @@ static void generic_slider_write_rc_file(XfcePanelPlugin *plugin, Generic_Slider
 static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
 	XfceRc *rc;
 	gchar *file;
-	gchar *tmp;
 	gchar *color_string;
+	const gchar *tmp;
 	
 	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> default_color.red, generic_slider -> default_color.green, generic_slider -> default_color.blue);
 	file = xfce_panel_plugin_lookup_rc_file(plugin);
@@ -464,7 +464,7 @@ static void generic_slider_update_denominators(GtkAdjustment *adjustment, int *d
 }
 
 static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *generic_slider) {
-	gchar *name;
+	const gchar *name;
 	char *label_text;
 	
 	name = gtk_widget_get_name(entry);
