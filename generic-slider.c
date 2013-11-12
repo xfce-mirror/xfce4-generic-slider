@@ -83,18 +83,12 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 		/* Gets the output of the command knowing that numbers are 48 less than their ASCII equivalents */
 		for (i = 0; i < 3; i++) {
 			c = fgetc(stream);
-			
-			if (c != EOF) {
+						
+			if ((c >= 48) && (c <= 57)) {
 				new_value = (10 * new_value) + (c - 48);
 			} else {
 				break;
 			}
-		}
-		
-		/* For some reason a 2 gets stuck onto the end */
-		if (new_value != (generic_slider -> sync_denominator)) {
-			new_value -= 2;
-			new_value /= 10;
 		}
 		
 		if (new_value <= (generic_slider -> sync_denominator)) {
