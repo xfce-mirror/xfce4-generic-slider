@@ -18,7 +18,7 @@ typedef struct generic_slider {
 	char *sync_command;
 	/* Whether we show label, slider or both */
 	int mode;
-	/* Corresponds to the function that runs every 100 ms */
+	/* Corresponds to the function that runs every second */
 	int timeout_id;
 	int description_denominator;
 	int adjust_denominator;
@@ -98,7 +98,7 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 			label_text = parse_command(generic_slider -> description, (generic_slider -> description_denominator) * (generic_slider -> value), (generic_slider -> description_denominator) * (generic_slider -> delta));
 			gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 			
-			if (repetition == 10) {
+			if (repetition == 3) {
 				repetition = 0;
 				gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 				gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
