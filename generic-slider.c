@@ -30,14 +30,14 @@ typedef struct generic_slider {
 } Generic_Slider;
 
 char *parse_command(char *primitive, int value, int delta) {
+	gchar *command;
 	int numds = 0;
 	int numvs = 0;
 	int i;
 	
 	if (!strcmp(primitive, "")) {
 		/* Functions that free this string later need something to free */
-		char *command = malloc(sizeof(char));
-		strcpy(command, "");
+		command = g_strdup("");
 		return command;
 	}
 	
@@ -51,18 +51,27 @@ char *parse_command(char *primitive, int value, int delta) {
 		}
 	}
 		
-	char *command = malloc((strlen(primitive) + 3 * (numds + numvs) + 1) * sizeof(char));
-	strcpy(command, primitive);
+	command = g_strdup(primitive);
 	
 	for (i = 0; i < numds; i++) {
 		gchar **frags = g_strsplit(command, "%d", 2);
 		gchar *delta_string = g_strdup_printf("%d", delta);
-		strcpy(command, g_strconcat(frags[0], delta_string, frags[1], NULL));
+		
+		g_free(command);
+		command = g_strconcat(frags[0], delta_string, frags[1], NULL);
+		
+		g_strfreev(frags);
+		g_free(delta_string);
 	}
 	for (i = 0; i < numvs; i++) {
 		gchar **frags = g_strsplit(command, "%v", 2);
 		gchar *value_string = g_strdup_printf("%d", value);
-		strcpy(command, g_strconcat(frags[0], value_string, frags[1], NULL));
+		
+		g_free(command);
+		command = g_strconcat(frags[0], value_string, frags[1], NULL);
+		
+		g_strfreev(frags);
+		g_free(value_string);
 	}
 	return command;
 }
@@ -300,6 +309,8 @@ static void generic_slider_write_rc_file(XfcePanelPlugin *plugin, Generic_Slider
 	xfce_rc_write_entry(rc, "mode",  g_strdup_printf("%d", generic_slider -> mode));
 	xfce_rc_write_entry(rc, "color", color_string);
 	xfce_rc_close(rc);
+	
+	g_free(color_string);
 }
 
 static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
@@ -329,19 +340,19 @@ static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider 
 			}
 			tmp = xfce_rc_read_entry(rc, "adjust_denominator", "100");
 			if (tmp != NULL) {
-				generic_slider -> adjust_denominator = (int) g_strtod(g_strdup(tmp), NULL);
+				generic_slider -> adjust_denominator = (int) g_strtod(tmp, NULL);
 			}
 			tmp = xfce_rc_read_entry(rc, "sync_denominator", "100");
 			if (tmp != NULL) {
-				generic_slider -> sync_denominator = (int) g_strtod(g_strdup(tmp), NULL);
+				generic_slider -> sync_denominator = (int) g_strtod(tmp, NULL);
 			}
 			tmp = xfce_rc_read_entry(rc, "description_denominator", "100");
 			if (tmp != NULL) {
-				generic_slider -> description_denominator = (int) g_strtod(g_strdup(tmp), NULL);
+				generic_slider -> description_denominator = (int) g_strtod(tmp, NULL);
 			}
 			tmp = xfce_rc_read_entry(rc, "mode", "0");
 			if (tmp != NULL) {
-				generic_slider -> mode = (int) g_strtod(g_strdup(tmp) , NULL);
+				generic_slider -> mode = (int) g_strtod(tmp , NULL);
 			}
 			tmp = xfce_rc_read_entry(rc, "color", color_string);
 			if (tmp != NULL) {
@@ -351,6 +362,7 @@ static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider 
 		}
 	}
 	
+	g_free(color_string);
 	generic_slider -> timeout_id = g_timeout_add(TIMEOUT, (GtkFunction)timer_cb, generic_slider);
 	generic_slider -> active = 1;
 }
@@ -459,15 +471,15 @@ static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *gen
 	
 	if (!strncmp(name, "A", 1)) {
 		/* We're changing the command to adjust */
-		generic_slider -> adjust_command = malloc((strlen(gtk_entry_get_text(GTK_ENTRY(entry))) + 1) * sizeof(char));
+		free(generic_slider -> adjust_command);
 		generic_slider -> adjust_command = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 	} else if (!strncmp(name, "B", 1)) {
 		/* We're changing the command with which to synchronize */
-		generic_slider -> sync_command = malloc((strlen(gtk_entry_get_text(GTK_ENTRY(entry))) + 1) * sizeof(char));
+		free(generic_slider -> sync_command);
 		generic_slider -> sync_command = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 	} else {
 		/* We're changing the slider's label */
-		generic_slider -> description = malloc((strlen(gtk_entry_get_text(GTK_ENTRY(entry))) + 1) * sizeof(char));
+		free(generic_slider -> description);
 		generic_slider -> description = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 		
 		label_text = parse_command(generic_slider -> description, (generic_slider -> description_denominator) * (generic_slider -> value), (generic_slider -> description_denominator) * (generic_slider -> delta));
