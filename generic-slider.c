@@ -386,10 +386,11 @@ static void generic_slider_update_color(GtkColorButton *picker, Generic_Slider *
 	generic_slider -> color = new_color;
 	rc = gtk_widget_get_modifier_style(generic_slider -> slider);
 	
-	if (!rc) {
+	//if (!rc) {
 		rc = gtk_rc_style_new();
-	}
+	//}
 	
+        printf("ok: %d, %d, %d\n", new_color.red, new_color.green, new_color.blue);    
 	if (rc) {
 		rc -> color_flags[GTK_STATE_PRELIGHT] |= GTK_RC_BG;
 		rc -> bg[GTK_STATE_PRELIGHT] = generic_slider -> color;
@@ -418,10 +419,12 @@ static void generic_slider_update_default(GtkToggleButton *check, Generic_Slider
 	if (gtk_toggle_button_get_active(check)) {
 		gtk_widget_set_sensitive(picker, FALSE);
 		generic_slider -> color = generic_slider -> default_color;
+                printf("ok: here\n");
 	} else {
 		gtk_widget_set_sensitive(picker, TRUE);
 		gtk_color_button_get_color(GTK_COLOR_BUTTON(picker), &new_color);
 		generic_slider -> color = new_color;
+                printf("ok: there\n");
 	}
 	
 	if (rc) {
@@ -647,7 +650,7 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_widget_show_all(dialog);
 }
 
-static void generic_slider_orientation_or_mode_changed(XfcePanelPlugin *plugin, gint rotate_label, gint vertical, Generic_Slider *generic_slider) {
+static void generic_slider_orientation_or_mode_changed(XfcePanelPlugin *plugin, gint vertical, Generic_Slider *generic_slider) {
 	GtkWidget *slider = generic_slider -> slider;
 	GtkWidget *label = generic_slider -> label;
 	GtkWidget *box = gtk_widget_get_ancestor(label, GTK_TYPE_BOX);
@@ -667,30 +670,30 @@ static void generic_slider_orientation_or_mode_changed(XfcePanelPlugin *plugin, 
 		gtk_widget_set_size_request(GTK_WIDGET(plugin), -1, xfce_panel_plugin_get_size(plugin));
 		gtk_orientable_set_orientation(GTK_ORIENTABLE(box), GTK_ORIENTATION_HORIZONTAL);
 	}
-	
-	if (rotate_label) {
-		if (vertical) {
-			gtk_label_set_angle(GTK_LABEL(label), 270);
-		} else {
-			gtk_label_set_angle(GTK_LABEL(label), 0);
-		}
-	}
 }
 
 #if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
 static void generic_slider_mode_changed(XfcePanelPlugin *plugin, XfcePanelPluginMode mode, Generic_Slider *generic_slider) {
+	GtkWidget *label = generic_slider -> label;
+	
 	if (mode != XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) {
-		generic_slider_orientation_or_mode_changed(plugin, 1, 1, generic_slider);
+		generic_slider_orientation_or_mode_changed(plugin, 1, generic_slider);
 	} else {
-		generic_slider_orientation_or_mode_changed(plugin, 1, 0, generic_slider);
+		generic_slider_orientation_or_mode_changed(plugin, 0, generic_slider);
+	}
+	
+	if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) {
+		gtk_label_set_angle(GTK_LABEL(label), 270);
+	} else {
+		gtk_label_set_angle(GTK_LABEL(label), 0);
 	}
 }
 #else
 static void generic_slider_orientation_changed(XfcePanelPlugin *plugin, GtkOrientation orientation, Generic_Slider *generic_slider) {
 	if (orientation == GTK_ORIENTATION_VERTICAL) {
-		generic_slider_orientation_or_mode_changed(plugin, 0, 1, generic_slider);
+		generic_slider_orientation_or_mode_changed(plugin, 1, generic_slider);
 	} else {
-		generic_slider_orientation_or_mode_changed(plugin, 0, 0, generic_slider);
+		generic_slider_orientation_or_mode_changed(plugin, 0, generic_slider);
 	}
 }
 #endif
