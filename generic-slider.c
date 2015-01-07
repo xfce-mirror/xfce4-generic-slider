@@ -386,11 +386,10 @@ static void generic_slider_update_color(GtkColorButton *picker, Generic_Slider *
 	generic_slider -> color = new_color;
 	rc = gtk_widget_get_modifier_style(generic_slider -> slider);
 	
-	//if (!rc) {
+	if (!rc) {
 		rc = gtk_rc_style_new();
-	//}
+	}
 	
-        printf("ok: %d, %d, %d\n", new_color.red, new_color.green, new_color.blue);    
 	if (rc) {
 		rc -> color_flags[GTK_STATE_PRELIGHT] |= GTK_RC_BG;
 		rc -> bg[GTK_STATE_PRELIGHT] = generic_slider -> color;
@@ -419,12 +418,10 @@ static void generic_slider_update_default(GtkToggleButton *check, Generic_Slider
 	if (gtk_toggle_button_get_active(check)) {
 		gtk_widget_set_sensitive(picker, FALSE);
 		generic_slider -> color = generic_slider -> default_color;
-                printf("ok: here\n");
 	} else {
 		gtk_widget_set_sensitive(picker, TRUE);
 		gtk_color_button_get_color(GTK_COLOR_BUTTON(picker), &new_color);
 		generic_slider -> color = new_color;
-                printf("ok: there\n");
 	}
 	
 	if (rc) {
