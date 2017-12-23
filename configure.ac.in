@@ -1,20 +1,19 @@
 dnl $Id$
 dnl
-dnl xfce4-generic-slider - A sample plugin for the Xfce panel
+dnl xfce4-generic-slider - A plugin to passes a value to a command for the Xfce panel
 dnl
-dnl 2017 John Doo <john@foo.org>
 dnl
 
 dnl ***************************
 dnl *** Version information ***
 dnl ***************************
-m4_define([sample_version_major], [0])
-m4_define([sample_version_minor], [0])
-m4_define([sample_version_micro], [1])
-m4_define([sample_version_nano],  []) dnl leave this empty to have no nano version
-m4_define([sample_version_build], [@REVISION@])
-m4_define([sample_version_tag], [])
-m4_define([sample_version], [sample_version_major().sample_version_minor().sample_version_micro()ifelse(sample_version_nano(), [], [], [.sample_version_nano()])ifelse(sample_version_tag(), [git], [sample_version_tag()-sample_version_build()], [sample_version_tag()])])
+m4_define([genericslider_version_major], [0])
+m4_define([genericslider_version_minor], [0])
+m4_define([genericslider_version_micro], [1])
+m4_define([genericslider_version_nano],  []) dnl leave this empty to have no nano version
+m4_define([genericslider_version_build], [@REVISION@])
+m4_define([genericslider_version_tag], [])
+m4_define([genericslider_version], [genericslider_version_major().genericslider_version_minor().genericslider_version_micro()ifelse(genericslider_version_nano(), [], [], [.genericslider_version_nano()])ifelse(genericslider_version_tag(), [git], [genericslider_version_tag()-genericslider_version_build()], [genericslider_version_tag()])])
 
 AC_CONFIG_MACRO_DIR([m4])
 dnl ***************************
@@ -22,7 +21,7 @@ dnl *** Initialize autoconf ***
 dnl ***************************
 AC_COPYRIGHT([Copyright (C) 2017
         The Xfce development team. All rights reserved.])
-AC_INIT([xfce4-generic-slider], [sample_version], [https://bugzilla.xfce.org/], [xfce4-generic-slider])
+AC_INIT([xfce4-generic-slider], [genericslider_version], [https://bugzilla.xfce.org/], [xfce4-generic-slider])
 AC_PREREQ([2.50])
 AC_REVISION([xfce4_panel_version_build])
 

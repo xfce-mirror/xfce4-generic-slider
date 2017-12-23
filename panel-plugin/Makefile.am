@@ -5,7 +5,7 @@ AM_CPPFLAGS = \
 	$(PLATFORM_CPPFLAGS)
 
 #
-# Sample plugin
+# Generic Slider plugin
 #
 plugin_LTLIBRARIES = \
 	libgeneric-slider.la
