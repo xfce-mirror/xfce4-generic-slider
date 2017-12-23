@@ -1,0 +1,10 @@
+[Xfce Panel]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=Generic Slider
+_Comment=Passes a value to a command
+Icon=gtk-remove
+X-XFCE-Module=generic-slider
+X-XFCE-Internal=false
+X-XFCE-Unique=false
+X-XFCE-API=1.0

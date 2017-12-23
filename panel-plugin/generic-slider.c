@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4ui/libxfce4ui.h>
 #define TIMEOUT 1000
 #define WIDTH 8
 
@@ -850,4 +851,4 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	}
 }
 
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(generic_slider_construct);
+XFCE_PANEL_PLUGIN_REGISTER(generic_slider_construct);
