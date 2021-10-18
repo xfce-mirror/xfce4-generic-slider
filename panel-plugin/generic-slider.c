@@ -3,11 +3,16 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfce4util/libxfce4util.h>
+#include <libxfce4panel/libxfce4panel.h>
 #include <libxfce4ui/libxfce4ui.h>
 #define TIMEOUT 1000
 #define WIDTH 8
+
+#ifdef LIBXFCE4PANEL_CHECK_VERSION
+#if LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+#define PANEL490
+#endif
+#endif
 
 typedef struct generic_slider {
 	GtkWidget *slider;
@@ -670,7 +675,7 @@ static void generic_slider_orientation_or_mode_changed(XfcePanelPlugin *plugin, 
 	}
 }
 
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+#ifdef PANEL490
 static void generic_slider_mode_changed(XfcePanelPlugin *plugin, XfcePanelPluginMode mode, Generic_Slider *generic_slider) {
 	GtkWidget *label = generic_slider -> label;
 	
@@ -801,7 +806,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	
 	xfce_panel_plugin_menu_show_configure (plugin);
 	
-#if defined (LIBXFCE4PANEL_CHECK_VERSION) && LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
+#ifdef PANEL490
 	g_signal_connect(plugin, "mode-changed", G_CALLBACK(generic_slider_mode_changed), generic_slider);
 #else	
 	g_signal_connect(plugin, "orientation-changed", G_CALLBACK(generic_slider_orientation_changed), generic_slider);
