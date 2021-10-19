@@ -8,12 +8,6 @@
 #define TIMEOUT 1000
 #define WIDTH 8
 
-#ifdef LIBXFCE4PANEL_CHECK_VERSION
-#if LIBXFCE4PANEL_CHECK_VERSION (4,9,0)
-#define PANEL490
-#endif
-#endif
-
 typedef struct generic_slider {
 	GtkWidget *slider;
 	GtkWidget *label;
@@ -675,23 +669,6 @@ static void generic_slider_orientation_or_mode_changed(XfcePanelPlugin *plugin, 
 	}
 }
 
-#ifdef PANEL490
-static void generic_slider_mode_changed(XfcePanelPlugin *plugin, XfcePanelPluginMode mode, Generic_Slider *generic_slider) {
-	GtkWidget *label = generic_slider -> label;
-	
-	if (mode != XFCE_PANEL_PLUGIN_MODE_HORIZONTAL) {
-		generic_slider_orientation_or_mode_changed(plugin, 1, generic_slider);
-	} else {
-		generic_slider_orientation_or_mode_changed(plugin, 0, generic_slider);
-	}
-	
-	if (mode == XFCE_PANEL_PLUGIN_MODE_VERTICAL) {
-		gtk_label_set_angle(GTK_LABEL(label), 270);
-	} else {
-		gtk_label_set_angle(GTK_LABEL(label), 0);
-	}
-}
-#else
 static void generic_slider_orientation_changed(XfcePanelPlugin *plugin, GtkOrientation orientation, Generic_Slider *generic_slider) {
 	if (orientation == GTK_ORIENTATION_VERTICAL) {
 		generic_slider_orientation_or_mode_changed(plugin, 1, generic_slider);
@@ -699,7 +676,6 @@ static void generic_slider_orientation_changed(XfcePanelPlugin *plugin, GtkOrien
 		generic_slider_orientation_or_mode_changed(plugin, 0, generic_slider);
 	}
 }
-#endif
 
 static gboolean generic_slider_set_size(XfcePanelPlugin *plugin, int size) {
 	if (xfce_panel_plugin_get_orientation(plugin) == GTK_ORIENTATION_HORIZONTAL) {
@@ -799,11 +775,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	
 	xfce_panel_plugin_menu_show_configure (plugin);
 	
-#ifdef PANEL490
-	g_signal_connect(plugin, "mode-changed", G_CALLBACK(generic_slider_mode_changed), generic_slider);
-#else	
 	g_signal_connect(plugin, "orientation-changed", G_CALLBACK(generic_slider_orientation_changed), generic_slider);
-#endif
 	g_signal_connect(plugin, "configure-plugin", G_CALLBACK(generic_slider_properties_dialog), generic_slider);
 	g_signal_connect(plugin, "size-changed", G_CALLBACK(generic_slider_set_size), NULL);
 	g_signal_connect(plugin, "free-data", G_CALLBACK(generic_slider_free_data), generic_slider);
