@@ -11,8 +11,8 @@
 typedef struct generic_slider {
 	GtkWidget *slider;
 	GtkWidget *label;
-	GdkColor color;
-	GdkColor default_color;
+	GdkRGBA color;
+	GtkCssProvider *css_provider;
 	char *description;
 	char *adjust_command;
 	char *sync_command;
@@ -27,6 +27,7 @@ typedef struct generic_slider {
 	double value;
 	double delta;
 	int active;
+	int ignoring_color;
 } Generic_Slider;
 
 char *parse_command(char *primitive, int value, int delta) {
@@ -286,7 +287,7 @@ static void generic_slider_write_rc_file(XfcePanelPlugin *plugin, Generic_Slider
 	gchar *color_string;
 	
 	/* Gdk colors sure have a lot of digits */
-	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> color.red, generic_slider -> color.green, generic_slider -> color.blue);
+	color_string = gdk_rgba_to_string(&(generic_slider -> color));
 	file = xfce_panel_plugin_save_location(plugin, TRUE);
 	
 	if (!file) {
@@ -307,6 +308,7 @@ static void generic_slider_write_rc_file(XfcePanelPlugin *plugin, Generic_Slider
 	xfce_rc_write_entry(rc, "sync_denominator", g_strdup_printf("%d", generic_slider -> sync_denominator));
 	xfce_rc_write_entry(rc, "description_denominator", g_strdup_printf("%d", generic_slider -> description_denominator));
 	xfce_rc_write_entry(rc, "mode",  g_strdup_printf("%d", generic_slider -> mode));
+	xfce_rc_write_entry(rc, "ignoring_color",  g_strdup_printf("%d", generic_slider -> ignoring_color));
 	xfce_rc_write_entry(rc, "color", color_string);
 	xfce_rc_close(rc);
 	
@@ -317,10 +319,13 @@ static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider 
 	XfceRc *rc;
 	gchar *file;
 	gchar *color_string;
+	GdkRGBA color_temp;
 	const gchar *tmp;
 	
-	color_string = g_strdup_printf("#%04X%04X%04X", generic_slider -> default_color.red, generic_slider -> default_color.green, generic_slider -> default_color.blue);
+	gdk_rgba_parse(&color_temp, "blue");
+	color_string = gdk_rgba_to_string(&color_temp);
 	file = xfce_panel_plugin_lookup_rc_file(plugin);
+	
 	if (file != NULL) {
 		rc = xfce_rc_simple_open(file, TRUE);
 		g_free(file);
@@ -354,9 +359,13 @@ static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider 
 			if (tmp != NULL) {
 				generic_slider -> mode = (int) g_strtod(tmp , NULL);
 			}
+			tmp = xfce_rc_read_entry(rc, "ignoring_color", "1");
+			if (tmp != NULL) {
+				generic_slider -> ignoring_color = (int) g_strtod(tmp , NULL);
+			}
 			tmp = xfce_rc_read_entry(rc, "color", color_string);
 			if (tmp != NULL) {
-				gdk_color_parse(tmp, &(generic_slider -> color));
+				gdk_rgba_parse(&(generic_slider -> color), tmp);
 			}
 			xfce_rc_close(rc);
 		}
@@ -378,56 +387,32 @@ static void generic_slider_properties_dialog_response(GtkWidget *dialog, gint re
 	generic_slider -> active = 1;
 }
 
-static void generic_slider_update_color(GtkColorButton *picker, Generic_Slider *generic_slider) {
-	GdkColor new_color;
-	GtkRcStyle *rc;
+static void generic_slider_update_color(GtkColorChooser *picker, Generic_Slider *generic_slider) {
+	GdkRGBA new_color;
+	char *css;
 	
-	gtk_color_button_get_color(picker, &new_color);
+	gtk_color_chooser_get_rgba(picker, &new_color);
 	generic_slider -> color = new_color;
-	rc = gtk_widget_get_modifier_style(generic_slider -> slider);
-	
-	if (!rc) {
-		rc = gtk_rc_style_new();
-	}
-	
-	if (rc) {
-		rc -> color_flags[GTK_STATE_PRELIGHT] |= GTK_RC_BG;
-		rc -> bg[GTK_STATE_PRELIGHT] = generic_slider -> color;
-		gtk_widget_modify_style(generic_slider -> slider, rc);
-	}
+	css = g_strdup_printf("progressbar progress { background-color: %s; }", gdk_rgba_to_string(&new_color));
+	gtk_css_provider_load_from_data(generic_slider -> css_provider, css, strlen(css), NULL);
+	free(css);
 }
 
 static void generic_slider_update_default(GtkToggleButton *check, Generic_Slider *generic_slider) {
 	GtkWidget *bbox;
 	GtkWidget *picker;
-	GdkColor new_color;
-	GtkRcStyle *rc;
 	
-	/* We could use the notify::color signal to shorten the code here.
-	 * However, library.gnome.org just briefly mentioned it and didn't tell me how to actually use it at all.
-	 */
-	 
 	bbox = gtk_widget_get_ancestor(GTK_WIDGET(check), GTK_TYPE_BUTTON_BOX);
 	picker = gtk_container_get_children(GTK_CONTAINER(bbox)) -> next -> data;
-	rc = gtk_widget_get_modifier_style(generic_slider -> slider);
-	
-	if (!rc) {
-		rc = gtk_rc_style_new();
-	}
 	
 	if (gtk_toggle_button_get_active(check)) {
 		gtk_widget_set_sensitive(picker, FALSE);
-		generic_slider -> color = generic_slider -> default_color;
+		generic_slider -> ignoring_color = 1;
+		gtk_style_context_remove_provider(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(generic_slider -> slider)), GTK_STYLE_PROVIDER(generic_slider -> css_provider));
 	} else {
 		gtk_widget_set_sensitive(picker, TRUE);
-		gtk_color_button_get_color(GTK_COLOR_BUTTON(picker), &new_color);
-		generic_slider -> color = new_color;
-	}
-	
-	if (rc) {
-		rc -> color_flags[GTK_STATE_PRELIGHT] |= GTK_RC_BG;
-		rc -> bg[GTK_STATE_PRELIGHT] = generic_slider -> color;
-		gtk_widget_modify_style(generic_slider -> slider, rc);
+		generic_slider -> ignoring_color = 0;
+		gtk_style_context_add_provider(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(generic_slider -> slider)), GTK_STYLE_PROVIDER(generic_slider -> css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	}
 }
 
@@ -617,7 +602,8 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	label_7 = gtk_label_new("Use default color");
 	check = gtk_check_button_new();
 	picker = gtk_color_button_new();
-	gtk_color_button_set_color(GTK_COLOR_BUTTON(picker), &(generic_slider -> color));
+	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(picker), &(generic_slider -> color));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), (generic_slider -> ignoring_color == 1) ? TRUE : FALSE);
 	g_signal_connect(G_OBJECT(check), "toggled", G_CALLBACK(generic_slider_update_default), generic_slider);
 	g_signal_connect(G_OBJECT(picker), "color-set", G_CALLBACK(generic_slider_update_color), generic_slider);
 	gtk_box_pack_start(GTK_BOX(hbox_4), label_7, FALSE, FALSE, 0);
@@ -734,6 +720,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	GtkWidget *box;
 	GList *stupid_hack = NULL;
 	char *label_text;
+	char *css;
 	
 	event_box = gtk_event_box_new();
 	slider = gtk_progress_bar_new();
@@ -742,6 +729,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	generic_slider -> value = 0.0;
 	generic_slider -> delta = 0.0;
 	generic_slider -> active = 0;
+	generic_slider -> ignoring_color = 1;
 	generic_slider -> adjust_denominator = 100;
 	generic_slider -> sync_denominator = 100;
 	generic_slider -> description_denominator = 100;
@@ -751,6 +739,8 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	generic_slider -> description = calloc(1, sizeof(char));
 	generic_slider -> adjust_command = calloc(1, sizeof(char));
 	generic_slider -> sync_command = calloc(1, sizeof(char));
+	generic_slider -> css_provider = gtk_css_provider_new();
+	gdk_rgba_parse(&(generic_slider -> color), "blue");
 
 	stupid_hack = g_list_append(stupid_hack, generic_slider);
 	stupid_hack = g_list_append(stupid_hack, plugin);
@@ -788,18 +778,16 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	xfce_panel_plugin_add_action_widget(plugin, label);
 	gtk_widget_show_all(box);
 	
-	/* The default color only corresponds to the theme in use once all widgets are shown! */
-	pre_rc = gtk_widget_get_style(generic_slider -> slider);
-	generic_slider -> default_color = pre_rc -> bg[GTK_STATE_PRELIGHT];
-	generic_slider -> color = generic_slider -> default_color;
 	generic_slider_read_rc_file(plugin, generic_slider);
-	
 	/* The rc file might've told us to hide some widgets or change the label or color */
+	css = g_strdup_printf("progressbar progress { background-color: %s; }", gdk_rgba_to_string(&(generic_slider -> color)));
+	gtk_css_provider_load_from_data(generic_slider -> css_provider, css, strlen(css), NULL);
 	label_text = parse_command(generic_slider -> description, (generic_slider -> description_denominator) * (generic_slider -> value), (generic_slider -> description_denominator) * (generic_slider -> delta));
 	gtk_label_set_text(GTK_LABEL(label), label_text);
 	gtk_widget_set_tooltip_text(slider, label_text);
 	gtk_widget_set_tooltip_text(label, label_text);
 	free(label_text);
+	free(css);
 	
 	if ((generic_slider -> mode) == 1) {
 		gtk_widget_hide(label);
@@ -807,18 +795,8 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 		gtk_widget_hide(slider);
 	}
 	
-	if ((generic_slider -> color.red != generic_slider -> default_color.red) || (generic_slider -> color.green != generic_slider -> default_color.green) || (generic_slider -> color.blue != generic_slider -> default_color.blue)) {
-		rc = gtk_widget_get_modifier_style(generic_slider -> slider);
-	
-		if (!rc) {
-			rc = gtk_rc_style_new();
-		}
-	
-		if (rc) {
-			rc -> color_flags[GTK_STATE_PRELIGHT] |= GTK_RC_BG;
-			rc -> bg[GTK_STATE_PRELIGHT] = generic_slider -> color;
-			gtk_widget_modify_style(generic_slider -> slider, rc);
-		}
+	if (generic_slider -> ignoring_color == 0) {
+		gtk_style_context_add_provider(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(generic_slider -> slider)), GTK_STYLE_PROVIDER(generic_slider -> css_provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	}
 }
 
