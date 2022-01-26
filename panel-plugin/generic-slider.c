@@ -549,9 +549,9 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	g_signal_connect(G_OBJECT(entry_1), "changed", G_CALLBACK(generic_slider_update_commands), generic_slider);
 	g_signal_connect(G_OBJECT(entry_2), "changed", G_CALLBACK(generic_slider_update_commands), generic_slider);
 	g_signal_connect(G_OBJECT(entry_3), "changed", G_CALLBACK(generic_slider_update_commands), generic_slider);
-	adjustment_1 = gtk_adjustment_new(((gdouble)(generic_slider -> adjust_denominator)), 1.0, 1000.0, 1.0, 1.0, 0.0);
-	adjustment_2 = gtk_adjustment_new(((gdouble)(generic_slider -> sync_denominator)), 1.0, 1000.0, 1.0, 1.0, 0.0);
-	adjustment_3 = gtk_adjustment_new(((gdouble)(generic_slider -> description_denominator)), 1.0, 1000.0, 1.0, 1.0, 0.0);
+	adjustment_1 = gtk_adjustment_new(((gdouble)(generic_slider -> adjust_denominator)), 1.0, 65535.0, 1.0, 1.0, 0.0);
+	adjustment_2 = gtk_adjustment_new(((gdouble)(generic_slider -> sync_denominator)), 1.0, 65535.0, 1.0, 1.0, 0.0);
+	adjustment_3 = gtk_adjustment_new(((gdouble)(generic_slider -> description_denominator)), 1.0, 65535.0, 1.0, 1.0, 0.0);
 	spin_1 = gtk_spin_button_new(adjustment_1, 0.5, 0);
 	spin_2 = gtk_spin_button_new(adjustment_2, 0.5, 0);
 	spin_3 = gtk_spin_button_new(adjustment_3, 0.5, 0);
