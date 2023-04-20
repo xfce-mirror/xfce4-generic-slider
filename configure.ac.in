@@ -18,9 +18,8 @@ m4_define([genericslider_version], [genericslider_version_major().genericslider_
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (C) 2017
-        The Xfce development team. All rights reserved.])
-AC_INIT([xfce4-generic-slider], [genericslider_version], [https://bugzilla.xfce.org/], [xfce4-generic-slider])
+AC_COPYRIGHT([Copyright (c) 2009-2023 The Xfce development team. All rights reserved.])
+AC_INIT([xfce4-generic-slider], [genericslider_version], [https://gitlab.xfce.org/panel-plugins/xfce4-generic-slider], [xfce4-generic-slider])
 AC_PREREQ([2.50])
 AC_REVISION([xfce4_panel_version_build])
 AC_CONFIG_MACRO_DIRS([m4])
