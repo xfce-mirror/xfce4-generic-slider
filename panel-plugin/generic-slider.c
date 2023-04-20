@@ -119,7 +119,7 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 			}
 		}
 		
-		free(label_text);
+		g_free(label_text);
 		pclose(stream);
 		generic_slider -> active = 1;
 	}
@@ -245,7 +245,7 @@ static gint scroll_slider_cb(GtkWidget *widget, GdkEventScroll *event, GList *st
 	gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 	gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 	gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
-	free(label_text);
+	g_free(label_text);
 	return TRUE;
 }
 
@@ -279,7 +279,7 @@ static gint adjust_slider_cb(GtkWidget *widget, GdkEventButton *event, GList *st
 		gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
-		free(label_text);
+		g_free(label_text);
 	}
 	
 	return FALSE;
@@ -399,7 +399,7 @@ static void generic_slider_update_color(GtkColorChooser *picker, Generic_Slider 
 	generic_slider -> color = new_color;
 	css = g_strdup_printf("progressbar progress { background-color: %s; }", gdk_rgba_to_string(&new_color));
 	gtk_css_provider_load_from_data(generic_slider -> css_provider, css, strlen(css), NULL);
-	free(css);
+	g_free(css);
 }
 
 static void generic_slider_update_default(GtkToggleButton *check, Generic_Slider *generic_slider) {
@@ -460,15 +460,15 @@ static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *gen
 	
 	if (!strncmp(name, "A", 1)) {
 		/* We're changing the command to adjust */
-		free(generic_slider -> adjust_command);
+		g_free(generic_slider -> adjust_command);
 		generic_slider -> adjust_command = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 	} else if (!strncmp(name, "B", 1)) {
 		/* We're changing the command with which to synchronize */
-		free(generic_slider -> sync_command);
+		g_free(generic_slider -> sync_command);
 		generic_slider -> sync_command = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 	} else {
 		/* We're changing the slider's label */
-		free(generic_slider -> description);
+		g_free(generic_slider -> description);
 		generic_slider -> description = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 		
 		label_text = parse_command(generic_slider -> description, (generic_slider -> description_denominator) * (generic_slider -> value), (generic_slider -> description_denominator) * (generic_slider -> delta));
@@ -476,7 +476,7 @@ static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *gen
 		gtk_label_set_text(GTK_LABEL(generic_slider -> label), label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 		gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
-		free(label_text);
+		g_free(label_text);
 	}
 }
 
@@ -702,16 +702,10 @@ static void generic_slider_free_data(XfcePanelPlugin *plugin, Generic_Slider *ge
 	if (generic_slider -> timeout_id != 0) {
 		g_source_remove(generic_slider -> timeout_id);
 	}
-	if (generic_slider -> adjust_command != NULL) {
-		free(generic_slider -> adjust_command);
-	}
-	if (generic_slider -> sync_command != NULL) {
-		free(generic_slider -> sync_command);
-	}
-	if (generic_slider -> description != NULL) {
-		free(generic_slider -> description);
-	}
-	free(generic_slider);
+	g_free(generic_slider -> adjust_command);
+	g_free(generic_slider -> sync_command);
+	g_free(generic_slider -> description);
+	g_free(generic_slider);
 }
 
 static void generic_slider_construct(XfcePanelPlugin *plugin) {
@@ -790,8 +784,8 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	gtk_label_set_text(GTK_LABEL(label), label_text);
 	gtk_widget_set_tooltip_text(slider, label_text);
 	gtk_widget_set_tooltip_text(label, label_text);
-	free(label_text);
-	free(css);
+	g_free(label_text);
+	g_free(css);
 	
 	if ((generic_slider -> mode) == 1) {
 		gtk_widget_hide(label);
