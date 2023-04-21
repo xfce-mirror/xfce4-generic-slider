@@ -34,11 +34,13 @@ typedef struct generic_slider {
 	int ignoring_color;
 } Generic_Slider;
 
+char *parse_command(char *primitive, int value, int delta);
+
 char *parse_command(char *primitive, int value, int delta) {
 	gchar *command;
-	int numds = 0;
-	int numvs = 0;
-	int i;
+	unsigned int numds = 0;
+	unsigned int numvs = 0;
+	unsigned int i;
 	
 	if (!strcmp(primitive, "")) {
 		/* Functions that free this string later need something to free */
@@ -83,16 +85,18 @@ char *parse_command(char *primitive, int value, int delta) {
 
 static gint timer_cb(Generic_Slider *generic_slider) {
 	static int repetition = 0;
-	char *label_text;
 	
 	if ((generic_slider -> active) && (strcmp(generic_slider -> sync_command, ""))) {
 		generic_slider -> active = 0;
-		FILE *stream = popen(parse_command(generic_slider -> sync_command, (generic_slider -> sync_denominator) * (generic_slider -> value), (generic_slider -> sync_denominator) * (generic_slider -> delta)), "r");
+	        char *label_text;
+		char *path = parse_command(generic_slider -> sync_command, (generic_slider -> sync_denominator) * (generic_slider -> value), (generic_slider -> sync_denominator) * (generic_slider -> delta));
+		FILE *stream = popen(path, "r");
 		int new_value = 0;
-		int i;
+		unsigned int i;
 		int c;
 		
 		repetition++;
+                g_free(path);
 		
 		/* Gets the output of the command knowing that numbers are 48 less than their ASCII equivalents */
 		for (i = 0; i < 3; i++) {
@@ -117,9 +121,10 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 				gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 				gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
 			}
+                        
+		        g_free(label_text);
 		}
 		
-		g_free(label_text);
 		pclose(stream);
 		generic_slider -> active = 1;
 	}
@@ -130,10 +135,10 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 static void execute_command(char *command) {
 	pid_t pid;
 	char **arglist;
-	int first_space = 0;
-	int max_arg_length = 0;
-	int num_args = 2;
-	int i, j, k;
+	unsigned int first_space = 0;
+	unsigned int max_arg_length = 0;
+	unsigned int num_args = 2;
+	unsigned int i, j, k;
 	
 	if (!strcmp(command, "")) return;
 	
@@ -710,8 +715,6 @@ static void generic_slider_free_data(XfcePanelPlugin *plugin, Generic_Slider *ge
 
 static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	Generic_Slider *generic_slider = calloc(1, sizeof(Generic_Slider));
-	GtkStyle *pre_rc;
-	GtkRcStyle *rc;
 	GtkWidget *event_box;
 	GtkWidget *slider;
 	GtkWidget *label;
