@@ -34,9 +34,7 @@ typedef struct generic_slider {
 	int ignoring_color;
 } Generic_Slider;
 
-char *parse_command(char *primitive, int value, int delta);
-
-char *parse_command(char *primitive, int value, int delta) {
+static char *parse_command(char *primitive, int value, int delta) {
 	gchar *command;
 	unsigned int numds = 0;
 	unsigned int numvs = 0;
