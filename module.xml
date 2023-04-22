@@ -1,6 +1,6 @@
 <Project>
 	<name xml:lang="en">xfce4-generic-slider</name>
-	<shortdesc xml:lang="en">Passes a value to a commnad</shortdesc>
+	<shortdesc xml:lang="en">Passes a value to a command</shortdesc>
 	<homepage rdf:resource="http://goodies.xfce.org/projects/panel-plugins/xfce4-generic-slider"/>
 	<mailing-list rdf:resource="http://foo-projects.org/mailman/listinfo/xfce"/>
 	<maintainer>
