@@ -22,11 +22,11 @@ Be sure to specify an installation prefix / DESTDIR so that it goes to the right
 
 Once xfce4-generic-slider is running in your panel, you can change the color of the slider and set whether a label appears beside it. To actually use it, you need to setup three references to the variable you're interested in. Here's an example of how to make a slider for the volume.
 
-    Adjsut this command: amixer set PCM %v
+    Adjust this command: amixer set PCM %v
     Denominator for adjusting: 255
     Synchronize with this command: amixer get PCM | tail -1 | awk '{print $4}'
     Denominator for synchronizing: 255
     Label for slider: PCM: %v
     Denominator for label: 255
 
-When the slider is dragged to a certain fraction, this fraction times 255 will be passed to amixer set. When another application changes the volume, the slider will call amixer get to determine what the returned number is as a fraction of 255. Note that the right denominator can differ depending on the sound card.
+When the slider is dragged to a certain fraction, this fraction times 255 will be passed to `amixer set`. When another application changes the volume, the slider will call `amixer get` to determine what the returned number is as a fraction of 255. Note that the right denominator can differ depending on the sound card.
