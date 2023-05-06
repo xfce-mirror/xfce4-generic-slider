@@ -39,7 +39,7 @@ static char *parse_command(char *primitive, int value, int delta) {
 	unsigned int numds = 0;
 	unsigned int numvs = 0;
 	unsigned int i;
-
+	
 	if (!strcmp(primitive, "")) {
 		/* Functions that free this string later need something to free */
 		command = g_strdup("");
@@ -679,27 +679,6 @@ static gboolean generic_slider_set_size(XfcePanelPlugin *plugin, int size) {
 }
 
 static void generic_slider_free_data(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
-	GtkWidget *event_box;
-	GtkWidget *slider;
-	GtkWidget *label;
-	GtkWidget *box;
-	
-	slider = generic_slider -> slider;
-	label = generic_slider -> label;
-	box = gtk_widget_get_ancestor(label, GTK_TYPE_BOX);
-	event_box = gtk_widget_get_ancestor(slider, GTK_TYPE_EVENT_BOX);
-	
-	g_return_if_fail(plugin != NULL);
-	g_return_if_fail(event_box != NULL);
-	g_return_if_fail(box != NULL);
-	g_return_if_fail(slider != NULL);
-	g_return_if_fail(label != NULL);
-	
-	g_object_unref(G_OBJECT(slider));
-	g_object_unref(G_OBJECT(label));
-	g_object_unref(G_OBJECT(box));
-	g_object_unref(G_OBJECT(event_box));
-	
 	if (generic_slider -> timeout_id != 0) {
 		g_source_remove(generic_slider -> timeout_id);
 	}
