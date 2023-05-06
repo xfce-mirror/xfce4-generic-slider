@@ -39,15 +39,15 @@ static char *parse_command(char *primitive, int value, int delta) {
 	unsigned int numds = 0;
 	unsigned int numvs = 0;
 	unsigned int i;
-	
+
 	if (!strcmp(primitive, "")) {
 		/* Functions that free this string later need something to free */
 		command = g_strdup("");
 		return command;
 	}
 	
-	for (i = 0; i < strlen(primitive); i++) {
-		if (primitive[i-1] == '%') {
+	for (i = 1; i < strlen(primitive); i++) {
+		if (primitive[i - 1] == '%') {
 			if (primitive[i] == 'd') {
 				numds++;
 			} else if (primitive[i] == 'v') {
@@ -55,7 +55,7 @@ static char *parse_command(char *primitive, int value, int delta) {
 			}
 		}
 	}
-		
+	
 	command = g_strdup(primitive);
 	
 	for (i = 0; i < numds; i++) {
