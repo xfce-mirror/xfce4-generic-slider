@@ -86,7 +86,7 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 	
 	if ((generic_slider -> active) && (strcmp(generic_slider -> sync_command, ""))) {
 		generic_slider -> active = 0;
-	        char *label_text;
+		char *label_text;
 		char *path = parse_command(generic_slider -> sync_command, (generic_slider -> sync_denominator) * (generic_slider -> value), (generic_slider -> sync_denominator) * (generic_slider -> delta));
 		FILE *stream = popen(path, "r");
 		int new_value = 0;
@@ -94,7 +94,7 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 		int c;
 		
 		repetition++;
-                g_free(path);
+		g_free(path);
 		
 		/* Gets the output of the command knowing that numbers are 48 less than their ASCII equivalents */
 		for (i = 0; i < 3; i++) {
@@ -119,8 +119,7 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 				gtk_widget_set_tooltip_text(generic_slider -> slider, label_text);
 				gtk_widget_set_tooltip_text(generic_slider -> label, label_text);
 			}
-                        
-		        g_free(label_text);
+			g_free(label_text);
 		}
 		
 		pclose(stream);
@@ -162,7 +161,7 @@ static void execute_command(char *command) {
 	for (i = 0; i < num_args; i++) {
 		arglist[i] = malloc((max_arg_length + 1) * sizeof(char));
 	}
-
+	
 	/* Puts the arguments in the arglist */
 	
 	j = k = 0;
@@ -183,7 +182,7 @@ static void execute_command(char *command) {
 	arglist[num_args - 1] = NULL;
 	
 	/* Forks */
-
+	
 	pid = fork();
 	if (pid == 0) {
 		wait(NULL);
@@ -191,7 +190,6 @@ static void execute_command(char *command) {
 		execvp(arglist[0], arglist);
 		perror("execvp");
 	}
-
 }
 
 static gint scroll_slider_cb(GtkWidget *widget, GdkEventScroll *event, GList *stupid_hack) {
@@ -386,10 +384,10 @@ static void generic_slider_read_rc_file(XfcePanelPlugin *plugin, Generic_Slider 
 static void generic_slider_properties_dialog_response(GtkWidget *dialog, gint response, GList *stupid_hack) {
 	Generic_Slider *generic_slider = stupid_hack -> data;
 	XfcePanelPlugin *plugin = stupid_hack -> next -> data;
-
+	
 	xfce_panel_plugin_unblock_menu(plugin);
 	gtk_widget_destroy(dialog);
-
+	
 	generic_slider_write_rc_file(plugin, generic_slider);
 	generic_slider -> active = 1;
 }
@@ -537,7 +535,7 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	stupid_hack = g_list_append(stupid_hack, generic_slider);
 	stupid_hack = g_list_append(stupid_hack, plugin);
 	g_signal_connect(dialog, "response", G_CALLBACK(generic_slider_properties_dialog_response), stupid_hack);
-
+	
 	label_1_a = gtk_label_new("Adjust this command:");
 	label_1_b = gtk_label_new("Denominator for adjusting:");
 	label_2_a = gtk_label_new("Synchronize with this command:");
@@ -676,7 +674,6 @@ static gboolean generic_slider_set_size(XfcePanelPlugin *plugin, int size) {
 	} else {
 		gtk_widget_set_size_request(GTK_WIDGET(plugin), size, -1);
 	}
-
 	return TRUE;
 }
 
@@ -740,7 +737,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	generic_slider -> sync_command = calloc(1, sizeof(char));
 	generic_slider -> css_provider = gtk_css_provider_new();
 	gdk_rgba_parse(&(generic_slider -> color), "blue");
-
+	
 	stupid_hack = g_list_append(stupid_hack, generic_slider);
 	stupid_hack = g_list_append(stupid_hack, plugin);
 	g_signal_connect(G_OBJECT(event_box), "button-press-event", G_CALLBACK(adjust_slider_cb), stupid_hack);
@@ -769,7 +766,7 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	g_signal_connect(plugin, "size-changed", G_CALLBACK(generic_slider_set_size), NULL);
 	g_signal_connect(plugin, "free-data", G_CALLBACK(generic_slider_free_data), generic_slider);
 	g_signal_connect(plugin, "save", G_CALLBACK(generic_slider_write_rc_file), generic_slider);
-
+	
 	gtk_container_add(GTK_CONTAINER(plugin), box);
 	xfce_panel_plugin_add_action_widget(plugin, box);
 	xfce_panel_plugin_add_action_widget(plugin, event_box);
