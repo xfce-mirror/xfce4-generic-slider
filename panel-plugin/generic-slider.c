@@ -409,9 +409,12 @@ static void generic_slider_update_color(GtkColorChooser *picker, Generic_Slider 
 static void generic_slider_update_default(GtkToggleButton *check, Generic_Slider *generic_slider) {
 	GtkWidget *bbox;
 	GtkWidget *picker;
+	GList *list;
 	
 	bbox = gtk_widget_get_ancestor(GTK_WIDGET(check), GTK_TYPE_BUTTON_BOX);
-	picker = gtk_container_get_children(GTK_CONTAINER(bbox)) -> next -> data;
+	list = gtk_container_get_children(GTK_CONTAINER(bbox));
+	picker = list -> next -> data;
+	g_list_free(list);
 	
 	if (gtk_toggle_button_get_active(check)) {
 		gtk_widget_set_sensitive(picker, FALSE);
