@@ -537,12 +537,12 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	stupid_hack = g_list_append(stupid_hack, plugin);
 	g_signal_connect(dialog, "response", G_CALLBACK(generic_slider_properties_dialog_response), stupid_hack);
 	
-	label_1_a = gtk_label_new("Adjust this command:");
-	label_1_b = gtk_label_new("Denominator for adjusting:");
-	label_2_a = gtk_label_new("Synchronize with this command:");
-	label_2_b = gtk_label_new("Denominator for synchronizing:");
-	label_3_a = gtk_label_new("Label for slider:");
-	label_3_b = gtk_label_new("Denominator for label:");
+	label_1_a = gtk_label_new(_("Adjust this command:"));
+	label_1_b = gtk_label_new(_("Denominator for adjusting:"));
+	label_2_a = gtk_label_new(_("Synchronize with this command:"));
+	label_2_b = gtk_label_new(_("Denominator for synchronizing:"));
+	label_3_a = gtk_label_new(_("Label for slider:"));
+	label_3_b = gtk_label_new(_("Denominator for label:"));
 	entry_1 = gtk_entry_new();
 	entry_2 = gtk_entry_new();
 	entry_3 = gtk_entry_new();
@@ -583,9 +583,9 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(bbox_2), GTK_BUTTONBOX_SPREAD);
 	//gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
 	//gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
-	label_4 = gtk_label_new("Slider");
-	label_5 = gtk_label_new("Label");
-	label_6 = gtk_label_new("Both");
+	label_4 = gtk_label_new(_("Slider"));
+	label_5 = gtk_label_new(_("Label"));
+	label_6 = gtk_label_new(_("Both"));
 	radio_1 = gtk_radio_button_new(NULL);
 	radio_2 = gtk_radio_button_new_from_widget(GTK_RADIO_BUTTON(radio_1));
 	radio_3 = gtk_radio_button_new_from_widget(GTK_RADIO_BUTTON(radio_2));
@@ -605,7 +605,7 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_container_add(GTK_CONTAINER(bbox_1), hbox_1);
 	gtk_container_add(GTK_CONTAINER(bbox_1), hbox_2);
 	gtk_container_add(GTK_CONTAINER(bbox_1), hbox_3);
-	label_7 = gtk_label_new("Use default color");
+	label_7 = gtk_label_new(_("Use default color"));
 	check = gtk_check_button_new();
 	picker = gtk_color_button_new();
 	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(picker), &(generic_slider -> color));
@@ -617,13 +617,13 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_container_add(GTK_CONTAINER(bbox_2), hbox_4);
 	gtk_container_add(GTK_CONTAINER(bbox_2), picker);
 	hbox_5 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	frame_1 = gtk_frame_new("Show:");
-	frame_2 = gtk_frame_new("Color:");
+	frame_1 = gtk_frame_new(_("Show:"));
+	frame_2 = gtk_frame_new(_("Color:"));
 	gtk_container_add(GTK_CONTAINER(frame_1), bbox_1);
 	gtk_container_add(GTK_CONTAINER(frame_2), bbox_2);
 	gtk_box_pack_start(GTK_BOX(hbox_5), frame_1, TRUE, TRUE, 5);
 	gtk_box_pack_start(GTK_BOX(hbox_5), frame_2, TRUE, TRUE, 5);
-	label_8 = gtk_label_new("%v for value between 0 and the denominator, %d for the change since last update");
+	label_8 = gtk_label_new(_("%v for value between 0 and the denominator, %d for the change since last update"));
 	
 	if (generic_slider -> mode == 1) {
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_1), TRUE);
@@ -697,6 +697,9 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	GList *stupid_hack = NULL;
 	char *label_text;
 	char *css;
+	
+	/* enable translations */
+	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 	
 	event_box = gtk_event_box_new();
 	slider = gtk_progress_bar_new();
