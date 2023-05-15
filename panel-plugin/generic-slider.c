@@ -422,24 +422,20 @@ static void generic_slider_update_default(GtkToggleButton *check, Generic_Slider
 }
 
 static void generic_slider_update_mode(GtkToggleButton *radio, Generic_Slider *generic_slider) {
-	GtkWidget *hbox;
-	GtkWidget *label;
 	GtkWidget *box;
 	
 	if (!gtk_toggle_button_get_active(radio)) {
 		return;
 	}
 	
-	hbox = gtk_widget_get_ancestor(GTK_WIDGET(radio), GTK_TYPE_BOX);
-	label = gtk_container_get_children(GTK_CONTAINER(hbox)) -> data;
 	box = gtk_widget_get_ancestor(generic_slider -> slider, GTK_TYPE_BOX);
 	gtk_widget_show_all(box);
 	
-	if (!strncmp(gtk_label_get_text(GTK_LABEL(label)), "S", 1)) {
+	if (!strncmp(gtk_button_get_label(GTK_BUTTON(radio)), "S", 1)) {
 		/* Only the slider should be shown */
 		generic_slider -> mode = 1;
 		gtk_widget_hide(generic_slider -> label);
-	} else if (!strncmp(gtk_label_get_text(GTK_LABEL(label)), "L", 1)) {
+	} else if (!strncmp(gtk_button_get_label(GTK_BUTTON(radio)), "L", 1)) {
 		/* Only the label should be shown */
 		generic_slider -> mode = 2;
 		gtk_widget_hide(generic_slider -> slider);
@@ -482,11 +478,7 @@ static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *gen
 }
 
 static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
-	GtkWidget *hbox_1;
-	GtkWidget *hbox_2;
-	GtkWidget *hbox_3;
-	GtkWidget *hbox_4;
-	GtkWidget *hbox_5;
+	GtkWidget *hbox;
 	GtkWidget *entry_1;
 	GtkWidget *entry_2;
 	GtkWidget *entry_3;
@@ -499,11 +491,6 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	GtkWidget *label_2_b;
 	GtkWidget *label_3_a;
 	GtkWidget *label_3_b;
-	GtkWidget *label_4;
-	GtkWidget *label_5;
-	GtkWidget *label_6;
-	GtkWidget *label_7;
-	GtkWidget *label_8;
 	GtkWidget *frame_1;
 	GtkWidget *frame_2;
 	GtkWidget *bbox_1;
@@ -543,9 +530,18 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	label_2_b = gtk_label_new(_("Denominator for synchronizing:"));
 	label_3_a = gtk_label_new(_("Label for slider:"));
 	label_3_b = gtk_label_new(_("Denominator for label:"));
+	gtk_label_set_xalign(GTK_LABEL(label_1_a), 0);
+	gtk_label_set_xalign(GTK_LABEL(label_1_b), 0);
+	gtk_label_set_xalign(GTK_LABEL(label_2_a), 0);
+	gtk_label_set_xalign(GTK_LABEL(label_2_b), 0);
+	gtk_label_set_xalign(GTK_LABEL(label_3_a), 0);
+	gtk_label_set_xalign(GTK_LABEL(label_3_b), 0);
 	entry_1 = gtk_entry_new();
 	entry_2 = gtk_entry_new();
 	entry_3 = gtk_entry_new();
+	gtk_widget_set_tooltip_text(entry_1, _("%v for value between 0 and the denominator, %d for the change since last update"));
+	gtk_widget_set_tooltip_text(entry_2, _("%v for value between 0 and the denominator, %d for the change since last update"));
+	gtk_widget_set_tooltip_text(entry_3, _("%v for value between 0 and the denominator, %d for the change since last update"));
 	gtk_widget_set_name(entry_1, "A");
 	gtk_widget_set_name(entry_2, "B");
 	gtk_widget_set_name(entry_3, "C");
@@ -565,6 +561,12 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	g_signal_connect(G_OBJECT(adjustment_2), "value_changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> sync_denominator));
 	g_signal_connect(G_OBJECT(adjustment_3), "value_changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> description_denominator));
 	table = gtk_grid_new();
+	gtk_grid_set_row_spacing(GTK_GRID(table), 2);
+	gtk_grid_set_column_spacing(GTK_GRID(table), 6);
+	gtk_widget_set_margin_start(table, 6);
+	gtk_widget_set_margin_end(table, 6);
+	gtk_widget_set_margin_top(table, 6);
+	gtk_widget_set_margin_bottom(table, 6);
 	gtk_grid_attach(GTK_GRID(table), label_1_a, 0, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(table), entry_1, 1, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(table), label_1_b, 2, 0, 1, 1);
@@ -581,49 +583,34 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	bbox_2 = gtk_button_box_new(GTK_ORIENTATION_VERTICAL);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(bbox_1), GTK_BUTTONBOX_SPREAD);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(bbox_2), GTK_BUTTONBOX_SPREAD);
-	//gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
-	//gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
-	label_4 = gtk_label_new(_("Slider"));
-	label_5 = gtk_label_new(_("Label"));
-	label_6 = gtk_label_new(_("Both"));
-	radio_1 = gtk_radio_button_new(NULL);
-	radio_2 = gtk_radio_button_new_from_widget(GTK_RADIO_BUTTON(radio_1));
-	radio_3 = gtk_radio_button_new_from_widget(GTK_RADIO_BUTTON(radio_2));
+	radio_1 = gtk_radio_button_new_with_label(NULL, _("Slider"));
+	radio_2 = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_1), _("Label"));
+	radio_3 = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_2), _("Both"));
 	g_signal_connect(G_OBJECT(radio_1), "toggled", G_CALLBACK(generic_slider_update_mode), generic_slider);
 	g_signal_connect(G_OBJECT(radio_2), "toggled", G_CALLBACK(generic_slider_update_mode), generic_slider);
 	g_signal_connect(G_OBJECT(radio_3), "toggled", G_CALLBACK(generic_slider_update_mode), generic_slider);
-	hbox_1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	hbox_2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	hbox_3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	hbox_4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_1), label_4, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_1), radio_1, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_2), label_5, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_2), radio_2, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_3), label_6, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_3), radio_3, FALSE, FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(bbox_1), hbox_1);
-	gtk_container_add(GTK_CONTAINER(bbox_1), hbox_2);
-	gtk_container_add(GTK_CONTAINER(bbox_1), hbox_3);
-	label_7 = gtk_label_new(_("Use default color"));
-	check = gtk_check_button_new();
+	gtk_container_add(GTK_CONTAINER(bbox_1), radio_1);
+	gtk_container_add(GTK_CONTAINER(bbox_1), radio_2);
+	gtk_container_add(GTK_CONTAINER(bbox_1), radio_3);
+	check = gtk_check_button_new_with_label(_("Use default color"));
 	picker = gtk_color_button_new();
 	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(picker), &(generic_slider -> color));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), (generic_slider -> ignoring_color == 1) ? TRUE : FALSE);
 	g_signal_connect(G_OBJECT(check), "toggled", G_CALLBACK(generic_slider_update_default), generic_slider);
 	g_signal_connect(G_OBJECT(picker), "color-set", G_CALLBACK(generic_slider_update_color), generic_slider);
-	gtk_box_pack_start(GTK_BOX(hbox_4), label_7, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_4), check, FALSE, FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(bbox_2), hbox_4);
+	gtk_container_add(GTK_CONTAINER(bbox_2), check);
 	gtk_container_add(GTK_CONTAINER(bbox_2), picker);
-	hbox_5 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+	hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
+	gtk_widget_set_margin_start(hbox, 6);
+	gtk_widget_set_margin_end(hbox, 6);
+	gtk_widget_set_margin_top(hbox, 6);
+	gtk_widget_set_margin_bottom(hbox, 6);
 	frame_1 = gtk_frame_new(_("Show:"));
 	frame_2 = gtk_frame_new(_("Color:"));
 	gtk_container_add(GTK_CONTAINER(frame_1), bbox_1);
 	gtk_container_add(GTK_CONTAINER(frame_2), bbox_2);
-	gtk_box_pack_start(GTK_BOX(hbox_5), frame_1, TRUE, TRUE, 5);
-	gtk_box_pack_start(GTK_BOX(hbox_5), frame_2, TRUE, TRUE, 5);
-	label_8 = gtk_label_new(_("%v for value between 0 and the denominator, %d for the change since last update"));
+	gtk_box_pack_start(GTK_BOX(hbox), frame_1, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), frame_2, TRUE, TRUE, 0);
 	
 	if (generic_slider -> mode == 1) {
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radio_1), TRUE);
@@ -634,8 +621,7 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	}
 	
 	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), table, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), hbox_5, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), label_8, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), hbox, FALSE, FALSE, 0);
 	gtk_widget_show_all(dialog);
 }
 
