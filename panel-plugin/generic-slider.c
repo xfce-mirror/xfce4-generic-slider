@@ -596,12 +596,12 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_container_add(GTK_CONTAINER(bbox_1), radio_3);
 	check = gtk_check_button_new_with_label(_("Use default color"));
 	picker = gtk_color_button_new();
-	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(picker), &(generic_slider -> color));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), (generic_slider -> ignoring_color == 1) ? TRUE : FALSE);
-	g_signal_connect(G_OBJECT(check), "toggled", G_CALLBACK(generic_slider_update_default), generic_slider);
-	g_signal_connect(G_OBJECT(picker), "color-set", G_CALLBACK(generic_slider_update_color), generic_slider);
 	gtk_container_add(GTK_CONTAINER(bbox_2), check);
 	gtk_container_add(GTK_CONTAINER(bbox_2), picker);
+	g_signal_connect(G_OBJECT(check), "toggled", G_CALLBACK(generic_slider_update_default), generic_slider);
+	g_signal_connect(G_OBJECT(picker), "color-set", G_CALLBACK(generic_slider_update_color), generic_slider);
+	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(picker), &(generic_slider -> color));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), (generic_slider -> ignoring_color == 1) ? TRUE : FALSE);
 	hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
 	gtk_widget_set_margin_start(hbox, 6);
 	gtk_widget_set_margin_end(hbox, 6);
