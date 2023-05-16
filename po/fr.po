@@ -6,15 +6,17 @@
 # Translators:
 # Nick Schermer <nick@xfce.org>, 2023
 # Ldm Public <ldmpub@gmail.com>, 2023
+# jc1 <jc1.quebecos@gmail.com>, 2023
+# Gaël Bonithon <gael@xfce.org>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 12:09+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
-"Last-Translator: Ldm Public <ldmpub@gmail.com>, 2023\n"
+"Last-Translator: Gaël Bonithon <gael@xfce.org>, 2023\n"
 "Language-Team: French (https://app.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:1
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Generic Slider"
 msgstr "Slider Générique"
 
@@ -31,6 +33,64 @@ msgstr "Slider Générique"
 msgid "Passes a value to a command"
 msgstr "Passe une valeur à une commande"
 
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "Fermer"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "Ajuster cette commande :"
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr "Dénominateur pour l'ajustement :"
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "Synchroniser avec cette commande :"
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr "Dénominateur pour la synchronisation :"
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "Étiquette pour le slider :"
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr "Dénominateur pour l'étiquette :"
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "Slider"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "Étiquette"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "Les deux"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "Utiliser la couleur par défaut"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "Afficher :"
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "Couleur :"
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v pour une valeur comprise entre 0 et le dénominateur, %d pour la "
+"modification depuis la dernière mise à jour"
