@@ -9,9 +9,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 12:09+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
 "Last-Translator: Moo, 2023\n"
 "Language-Team: Lithuanian (https://app.transifex.com/xfce/teams/16840/lt/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:1
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Generic Slider"
 msgstr "Bendrinis slankiklis"
 
@@ -30,6 +30,63 @@ msgstr "Bendrinis slankiklis"
 msgid "Passes a value to a command"
 msgstr "Perduoda komandai reikšmę"
 
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "Užverti"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "Derinti šią komandą:"
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr "Derinimo vardiklis:"
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "Sinchronizuoti su šia komanda:"
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr "Sinchronizavimo vardiklis:"
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "Slankiklio etiketė:"
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr "Etiketės vardiklis:"
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "Slankiklis"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "Etiketė"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "Abu"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "Naudoti numatytąją spalvą"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "Rodyti:"
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "Spalva:"
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v – reikšmė tarp 0 ir vardiklio, %d – pakeitimas nuo paskutinio atnaujinimo"
