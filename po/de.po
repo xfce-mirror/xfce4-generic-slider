@@ -10,9 +10,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 12:09+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
 "Last-Translator: Andreas Eitel <github-aneitel@online.de>, 2023\n"
 "Language-Team: German (https://app.transifex.com/xfce/teams/16840/de/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:1
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Generic Slider"
 msgstr "Allgemeiner Schieberegler"
 
@@ -31,6 +31,64 @@ msgstr "Allgemeiner Schieberegler"
 msgid "Passes a value to a command"
 msgstr "Übergibt einen Wert an einen Befehl"
 
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "Schließen"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "Passen Sie diesen Befehl an:"
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr "Name für die Anpassung:"
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "Mit diesem Befehl synchronisieren:"
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr "Name für die Synchronisierung:"
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "Bezeichnung für den Schieberegler:"
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr "Name für die Bezeichnung:"
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "Schieberegler"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "Beschriftung:"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "Beide"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "Standardfarbe verwenden"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "Anzeigen:"
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "Farbe:"
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v für einen Wert zwischen 0 und dem Namen, %d für die Veränderung seit der "
+"letzten Aktualisierung"
