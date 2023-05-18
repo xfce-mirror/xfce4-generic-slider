@@ -8,6 +8,7 @@
 # Ldm Public <ldmpub@gmail.com>, 2023
 # jc1 <jc1.quebecos@gmail.com>, 2023
 # Gaël Bonithon <gael@xfce.org>, 2023
+# Wallon Wallon, 2023
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
-"Last-Translator: Gaël Bonithon <gael@xfce.org>, 2023\n"
+"Last-Translator: Wallon Wallon, 2023\n"
 "Language-Team: French (https://app.transifex.com/xfce/teams/16840/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +44,7 @@ msgstr "Ajuster cette commande :"
 
 #: ../panel-plugin/generic-slider.c:541
 msgid "Denominator for adjusting:"
-msgstr "Dénominateur pour l'ajustement :"
+msgstr "Dénominateur pour l’ajustement :"
 
 #: ../panel-plugin/generic-slider.c:542
 msgid "Synchronize with this command:"
@@ -59,7 +60,7 @@ msgstr "Étiquette pour le slider :"
 
 #: ../panel-plugin/generic-slider.c:545
 msgid "Denominator for label:"
-msgstr "Dénominateur pour l'étiquette :"
+msgstr "Dénominateur pour l’étiquette :"
 
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
