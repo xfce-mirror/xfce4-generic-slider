@@ -5,15 +5,17 @@
 # 
 # Translators:
 # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2023
+# Nick Schermer <nick@xfce.org>, 2023
+# UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 12:09+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
-"Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2023\n"
+"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2023\n"
 "Language-Team: Japanese (https://app.transifex.com/xfce/teams/16840/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +24,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:1
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Generic Slider"
 msgstr "基本スライダー"
 
@@ -30,6 +32,62 @@ msgstr "基本スライダー"
 msgid "Passes a value to a command"
 msgstr "コマンドに値を渡す"
 
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "閉じる"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "このコマンドを調整する:"
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr ""
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "このコマンドで同期する:"
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr ""
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "スライダーのラベル:"
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr ""
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "スライダー"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "ラベル"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "両方"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "デフォルトの色を使用する"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "表示:"
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "色:"
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
