@@ -25,7 +25,7 @@ msgstr ""
 #: ../panel-plugin/generic-slider.desktop.in.h:1
 #: ../panel-plugin/generic-slider.c:532
 msgid "Generic Slider"
-msgstr "Загальний слайдер"
+msgstr "Загальний повзунок"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:2
 msgid "Passes a value to a command"
@@ -37,33 +37,33 @@ msgstr "Закрити"
 
 #: ../panel-plugin/generic-slider.c:540
 msgid "Adjust this command:"
-msgstr ""
+msgstr "Регулювати цю команду:"
 
 #: ../panel-plugin/generic-slider.c:541
 msgid "Denominator for adjusting:"
-msgstr ""
+msgstr "Знаменник для регулювання:"
 
 #: ../panel-plugin/generic-slider.c:542
 msgid "Synchronize with this command:"
-msgstr ""
+msgstr "Синхронізувати з цією командою:"
 
 #: ../panel-plugin/generic-slider.c:543
 msgid "Denominator for synchronizing:"
-msgstr ""
+msgstr "Знаменник для синхронізації:"
 
 #: ../panel-plugin/generic-slider.c:544
 msgid "Label for slider:"
-msgstr "Мітка для слайдера:"
+msgstr "Мітка для повзунка:"
 
 #: ../panel-plugin/generic-slider.c:545
 msgid "Denominator for label:"
-msgstr ""
+msgstr "Знаменник для мітки:"
 
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
 #: ../panel-plugin/generic-slider.c:586
 msgid "Slider"
-msgstr "Слайдер"
+msgstr "Повзунок"
 
 #: ../panel-plugin/generic-slider.c:587
 msgid "Label"
@@ -90,3 +90,5 @@ msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr ""
+"%v для значення між 0 і знаменником, %d для зміни з часу останнього "
+"оновлення"
