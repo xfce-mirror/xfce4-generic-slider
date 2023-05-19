@@ -134,13 +134,9 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 
 static void execute_command(char *command) {
 	pid_t pid;
-	gint argcount;
 	gchar **arglist;
-	GError *err = NULL;
 	
-	if (!strcmp(command, "")) return;
-	g_shell_parse_argv(command, &argcount, &arglist, &err);;
-	if (err != NULL) return;
+	if (!g_shell_parse_argv(command, NULL, &arglist, NULL)) return;
 	
 	/* Forks */
 	
