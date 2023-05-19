@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Allan Nordhøy <epost@anotheragency.no>, 2023
+# Harald H. <haarektrans@gmail.com>, 2023
 # heskjestad <cato@heskjestad.xyz>, 2023
 # 
 #, fuzzy
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-08 09:38+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
 "Last-Translator: heskjestad <cato@heskjestad.xyz>, 2023\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/xfce/teams/16840/nb/)\n"
@@ -34,3 +35,60 @@ msgstr "Sender en verdi til en kommando"
 #: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "Lukk"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "Juster denne kommandoen:"
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr "Nevner for justering:"
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "Synkroniser med denne kommandoen:"
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr "Nevner for synkronisering:"
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "Glidebryterens etikett:"
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr "Nevner for etikett:"
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "Glidebryter"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "Etikett"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "Begge"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "Bruk standardfarge"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "Vis:"
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "Farge:"
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v for verdi mellom 0 og nevner, %d for endring siden siste oppdatering"
