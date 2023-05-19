@@ -134,60 +134,19 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 
 static void execute_command(char *command) {
 	pid_t pid;
-	char **arglist;
-	unsigned int first_space = 0;
-	unsigned int max_arg_length = 0;
-	unsigned int num_args = 2;
-	unsigned int i, j, k;
+	gint argcount;
+	gchar **arglist;
+	GError *err = NULL;
 	
 	if (!strcmp(command, "")) return;
-	
-	/* Allocates the arglist appropriately */
-	
-	j = 0;
-	for (i = 0; i < strlen(command); i++) {
-		if (command[i] == ' ') {
-			if (!first_space) {
-				first_space = i;
-			}
-			if (command[i - 1] != ' ') {
-				num_args++;
-				max_arg_length = MAX(max_arg_length, j);
-				j = 0;
-			}
-		} else {
-			j++;
-		}
-	}
-	arglist = malloc(num_args * sizeof(char *));
-	
-	for (i = 0; i < num_args; i++) {
-		arglist[i] = malloc((max_arg_length + 1) * sizeof(char));
-	}
-	
-	/* Puts the arguments in the arglist */
-	
-	j = k = 0;
-	for (i = 0; i < strlen(command); i++) {
-		if (command[i] == ' ') {
-			if (command[i - 1] != ' ') {
-				arglist[j][k] = '\0';
-				k = 0;
-				j++;
-			}
-		} else {
-			arglist[j][k] = command[i];
-			k++;
-		}
-	}
-	
-	arglist[j][k] = '\0';
-	arglist[num_args - 1] = NULL;
+	g_shell_parse_argv(command, &argcount, &arglist, &err);;
+	if (err != NULL) return;
 	
 	/* Forks */
 	
 	pid = fork();
 	if (pid == 0) {
+		g_strfreev(arglist);
 		wait(NULL);
 	} else {
 		execvp(arglist[0], arglist);
