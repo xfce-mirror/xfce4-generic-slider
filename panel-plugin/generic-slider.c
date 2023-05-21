@@ -132,24 +132,6 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 	return TRUE;
 }
 
-static void execute_command(char *command) {
-	pid_t pid;
-	gchar **arglist;
-	
-	if (!g_shell_parse_argv(command, NULL, &arglist, NULL)) return;
-	
-	/* Forks */
-	
-	pid = fork();
-	if (pid == 0) {
-		g_strfreev(arglist);
-		wait(NULL);
-	} else {
-		execvp(arglist[0], arglist);
-		perror("execvp");
-	}
-}
-
 static gint scroll_slider_cb(GtkWidget *widget, GdkEventScroll *event, GList *stupid_hack) {
 	char *label_text;
 	GdkScrollDirection dir;
@@ -197,7 +179,7 @@ static gint scroll_slider_cb(GtkWidget *widget, GdkEventScroll *event, GList *st
 	}
 	
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(generic_slider -> slider), generic_slider -> value);	
-	execute_command(parse_command(generic_slider -> adjust_command, (generic_slider -> adjust_denominator) * (generic_slider -> value), (generic_slider -> adjust_denominator) * (generic_slider -> delta)));
+	g_spawn_command_line_sync(parse_command(generic_slider -> adjust_command, (generic_slider -> adjust_denominator) * (generic_slider -> value), (generic_slider -> adjust_denominator) * (generic_slider -> delta)), NULL, NULL, NULL, NULL);
 	
 	label_text = parse_command(generic_slider -> description, (generic_slider -> description_denominator) * (generic_slider -> value), (generic_slider -> description_denominator) * (generic_slider -> delta));
 	
@@ -231,7 +213,7 @@ static gint adjust_slider_cb(GtkWidget *widget, GdkEventButton *event, GList *st
 		generic_slider -> delta = value_to_try - generic_slider -> value;
 		generic_slider -> value = value_to_try;
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(generic_slider -> slider), value_to_try);	
-		execute_command(parse_command(generic_slider -> adjust_command, (generic_slider -> adjust_denominator) * (generic_slider -> value), (generic_slider -> adjust_denominator) * (generic_slider -> delta)));
+		g_spawn_command_line_sync(parse_command(generic_slider -> adjust_command, (generic_slider -> adjust_denominator) * (generic_slider -> value), (generic_slider -> adjust_denominator) * (generic_slider -> delta)), NULL, NULL, NULL, NULL);
 		
 		label_text = parse_command(generic_slider -> description, (generic_slider -> description_denominator) * (generic_slider -> value), (generic_slider -> description_denominator) * (generic_slider -> delta));
 		
