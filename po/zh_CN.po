@@ -10,9 +10,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-panel-plugins\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 12:09+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/xfce/teams/16840/zh_CN/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:1
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Generic Slider"
 msgstr "通用滑块"
 
@@ -31,6 +31,62 @@ msgstr "通用滑块"
 msgid "Passes a value to a command"
 msgstr "将值传递给命令"
 
-#: ../panel-plugin/generic-slider.c:533
+#: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "关闭"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "调整此命令："
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr "调整分母："
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "使用此命令同步："
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr "同步分母："
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "滑块标签："
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr "标签分母："
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "滑块"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "标签"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "两者都有"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "使用默认颜色"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "显示："
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "颜色："
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr "%v 表示 0 和分母之间的值，%d表示自上次更新以来的变化"
