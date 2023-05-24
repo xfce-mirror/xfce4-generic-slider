@@ -42,7 +42,7 @@ msgstr "このコマンドを調整する:"
 
 #: ../panel-plugin/generic-slider.c:541
 msgid "Denominator for adjusting:"
-msgstr ""
+msgstr "調整の基準:"
 
 #: ../panel-plugin/generic-slider.c:542
 msgid "Synchronize with this command:"
@@ -50,7 +50,7 @@ msgstr "このコマンドで同期する:"
 
 #: ../panel-plugin/generic-slider.c:543
 msgid "Denominator for synchronizing:"
-msgstr ""
+msgstr "同期の基準:"
 
 #: ../panel-plugin/generic-slider.c:544
 msgid "Label for slider:"
@@ -58,7 +58,7 @@ msgstr "スライダーのラベル:"
 
 #: ../panel-plugin/generic-slider.c:545
 msgid "Denominator for label:"
-msgstr ""
+msgstr "ラベルの基準:"
 
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
@@ -90,4 +90,4 @@ msgstr "色:"
 msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
-msgstr ""
+msgstr "%v は 0 から基準までの値、%d は前回の更新以降の変更"
