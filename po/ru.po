@@ -4,18 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nick Schermer <nick@xfce.org>, 2023
 # Arthur D., 2023
 # Артём Котлубай <artemkotlubai@yandex.ru>, 2023
+# Nick Schermer <nick@xfce.org>, 2023
+# Andrei Stepanov, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-08 09:38+0200\n"
+"POT-Creation-Date: 2023-05-16 00:50+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
-"Last-Translator: Артём Котлубай <artemkotlubai@yandex.ru>, 2023\n"
+"Last-Translator: Andrei Stepanov, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/xfce/teams/16840/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,3 +36,61 @@ msgstr "Передаёт значение команде"
 #: ../panel-plugin/generic-slider.c:532
 msgid "Close"
 msgstr "Закрыть"
+
+#: ../panel-plugin/generic-slider.c:540
+msgid "Adjust this command:"
+msgstr "Регулировать эту команду:"
+
+#: ../panel-plugin/generic-slider.c:541
+msgid "Denominator for adjusting:"
+msgstr "Знаменатель для регулировки:"
+
+#: ../panel-plugin/generic-slider.c:542
+msgid "Synchronize with this command:"
+msgstr "Синхронизировать с помощью этой команды:"
+
+#: ../panel-plugin/generic-slider.c:543
+msgid "Denominator for synchronizing:"
+msgstr "Знаменатель для синхронизации:"
+
+#: ../panel-plugin/generic-slider.c:544
+msgid "Label for slider:"
+msgstr "Метка для ползунка:"
+
+#: ../panel-plugin/generic-slider.c:545
+msgid "Denominator for label:"
+msgstr "Знаменатель для метки:"
+
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
+#. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
+#: ../panel-plugin/generic-slider.c:586
+msgid "Slider"
+msgstr "Ползунок"
+
+#: ../panel-plugin/generic-slider.c:587
+msgid "Label"
+msgstr "Метка"
+
+#: ../panel-plugin/generic-slider.c:588
+msgid "Both"
+msgstr "Оба"
+
+#: ../panel-plugin/generic-slider.c:608
+msgid "Use default color"
+msgstr "Использовать цвет по умолчанию"
+
+#: ../panel-plugin/generic-slider.c:620
+msgid "Show:"
+msgstr "Отображать:"
+
+#: ../panel-plugin/generic-slider.c:621
+msgid "Color:"
+msgstr "Цвет:"
+
+#: ../panel-plugin/generic-slider.c:626
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v для значения между 0 и знаменателем, %d для изменения с момента "
+"последнего обновления"
