@@ -41,7 +41,7 @@ msgstr "Прилагоди ову наредбу:"
 
 #: ../panel-plugin/generic-slider.c:541
 msgid "Denominator for adjusting:"
-msgstr ""
+msgstr "Именилац подешавања:"
 
 #: ../panel-plugin/generic-slider.c:542
 msgid "Synchronize with this command:"
@@ -49,7 +49,7 @@ msgstr "Усклади са овом наредбом:"
 
 #: ../panel-plugin/generic-slider.c:543
 msgid "Denominator for synchronizing:"
-msgstr ""
+msgstr "Именилац усклађивања:"
 
 #: ../panel-plugin/generic-slider.c:544
 msgid "Label for slider:"
@@ -57,7 +57,7 @@ msgstr "Ознака овог клизача:"
 
 #: ../panel-plugin/generic-slider.c:545
 msgid "Denominator for label:"
-msgstr ""
+msgstr "Именилац натписа:"
 
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_1), 10);
 #. gtk_button_box_set_spacing(GTK_BUTTON_BOX(bbox_2), 10);
@@ -90,3 +90,4 @@ msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr ""
+"%v за вредности између 0 и имениоца, %d за измену од последњег освежења"
