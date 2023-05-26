@@ -12,7 +12,7 @@ m4_define([genericslider_version_minor], [0])
 m4_define([genericslider_version_micro], [0])
 m4_define([genericslider_version_nano],  []) dnl leave this empty to have no nano version
 m4_define([genericslider_version_build], [@REVISION@])
-m4_define([genericslider_version_tag], [])
+m4_define([genericslider_version_tag], [git])
 m4_define([genericslider_version], [genericslider_version_major().genericslider_version_minor().genericslider_version_micro()ifelse(genericslider_version_nano(), [], [], [.genericslider_version_nano()])ifelse(genericslider_version_tag(), [git], [genericslider_version_tag()-genericslider_version_build()], [genericslider_version_tag()])])
 
 dnl ***************************
