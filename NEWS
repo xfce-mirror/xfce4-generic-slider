@@ -1,0 +1,73 @@
+1.0.0 (2023-05-26)
+=====
+- Keep original svg with exported png also in 128x128
+- Update icon name in desktop file
+- Update configure.ac.in to include icon directories
+- Add icons and update makefiles
+- Add app icon
+- Fix appearance of the context menu directly after adjusting
+- Fix memory leak
+- Use glib to prepare adjust command
+- Fix memory leak
+- Properly initialize default color in prefs dialog
+- Improve prefs dialog
+- Enable translations and translate more strings
+- Remove explicit GObject calls
+- Fix crash while parsing
+- Block menu while configuring
+- Change whitespace
+- readme: Fix typo
+- Remove module.xml
+- Fix typo in metadata
+- Fix them in a better way
+- Fix compiler warnings
+- Use g_free() instead of free()
+- build: autogen.sh cleanup
+- Add basic GitLab pipeline
+- build: Fix intltool lock file problem during make distcheck
+- Update copyright year and bug report address
+- build: Add missing includes
+- build: Add GLib requirement
+- build: Fix autotools warnings
+- Raise the adjustment limits
+- Give this the right extension
+- Fill in README
+- Update color support
+- Drop support for old panels
+- Change the packing order
+- Use GtkGrid instead of GtkTable
+- Stop using some things
+- Make it build with GTK3
+- Use plugin API 2.0
+- Remove 'sample' mentions.
+- Revamp of the build system
+- Allow higher denominators
+- Remove accidental debugging printfs
+- Rotate label properly in deskbar mode
+- Fewer compiler warnings
+- Be much better about using the built-in string functions
+- Removing deprecated GTK_DIALOG_NO_SEPARATOR
+- Change the time delay constants
+- Reject non-numeric characters instead of working around them
+- Switch to a simple icon that most people should have
+- Be more careful about freeing empty strings
+- Remove some errors in how I casted variables
+- Write an rc file without relying on the save signal
+- Added empty string safeguards for when the plugin is unconfigured
+- And they were still reversed after that
+- Preprocessor directives were reversed
+- The gui4 headers should be 4util headers
+- Allow mode changing in xfce4-panel 4.9
+- Better default install directory
+- GSEAL compliance except for the Xfce stuff
+- Leave the CFLAGS untouched
+- Link against the right libraries for use with xfce4-panel 4.8
+- Fixed zombie process bug
+- Added module.xml
+- Initial commit
+- Translation Updates:
+  Albanian, Bulgarian, Chinese (China), Chinese (Taiwan), Dutch,
+  English (United Kingdom), Finnish, French, German, Hebrew,
+  Indonesian, Interlingue, Italian, Japanese, Lithuanian, Norwegian
+  Bokmål, Polish, Portuguese, Russian, Serbian, Slovak, Slovenian,
+  Swedish, Turkish, Ukrainian
