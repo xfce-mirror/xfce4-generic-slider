@@ -29,7 +29,7 @@ msgstr "Generisk skyder"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:2
 msgid "Passes a value to a command"
-msgstr ""
+msgstr "Videregiver en værdi til en kommando"
 
 #: ../panel-plugin/generic-slider.c:14
 msgid "Slider"
@@ -53,7 +53,7 @@ msgstr "Juster kommandoen:"
 
 #: ../panel-plugin/generic-slider.c:471
 msgid "Denominator for adjusting:"
-msgstr ""
+msgstr "Fællesnævner for justering:"
 
 #: ../panel-plugin/generic-slider.c:472
 msgid "Synchronize with this command:"
@@ -61,7 +61,7 @@ msgstr "Synkroniser med denne kommando:"
 
 #: ../panel-plugin/generic-slider.c:473
 msgid "Denominator for synchronizing:"
-msgstr ""
+msgstr "Fællesnævner for synkronisering:"
 
 #: ../panel-plugin/generic-slider.c:474
 msgid "Label for slider:"
@@ -69,7 +69,7 @@ msgstr "Etiket for skyder:"
 
 #: ../panel-plugin/generic-slider.c:475
 msgid "Denominator for label:"
-msgstr ""
+msgstr "Fællesnævner for etiket:"
 
 #: ../panel-plugin/generic-slider.c:485 ../panel-plugin/generic-slider.c:486
 #: ../panel-plugin/generic-slider.c:487
@@ -77,6 +77,8 @@ msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr ""
+"%v for værdi mellem 0 og fællesnævneren, %d for ændringen siden sidste "
+"opdatering"
 
 #: ../panel-plugin/generic-slider.c:538
 msgid "Use default color"
