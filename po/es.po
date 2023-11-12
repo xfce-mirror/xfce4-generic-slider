@@ -30,7 +30,7 @@ msgstr "Deslizador Generico"
 
 #: ../panel-plugin/generic-slider.desktop.in.h:2
 msgid "Passes a value to a command"
-msgstr ""
+msgstr "Pasa un valor a un comando"
 
 #: ../panel-plugin/generic-slider.c:14
 msgid "Slider"
@@ -78,15 +78,17 @@ msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr ""
+"%v para valor entre 0 y el denominador, %d para el cambio desde la última "
+"actualización"
 
 #: ../panel-plugin/generic-slider.c:538
 msgid "Use default color"
-msgstr ""
+msgstr "Usar color por defecto"
 
 #: ../panel-plugin/generic-slider.c:551
 msgid "Show:"
-msgstr ""
+msgstr "Mostrar:"
 
 #: ../panel-plugin/generic-slider.c:552
 msgid "Color:"
-msgstr ""
+msgstr "Color:"
