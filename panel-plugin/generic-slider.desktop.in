@@ -1,8 +1,8 @@
 [Xfce Panel]
 Type=X-XFCE-PanelPlugin
 Encoding=UTF-8
-_Name=Generic Slider
-_Comment=Passes a value to a command
+Name=Generic Slider
+Comment=Passes a value to a command
 Icon=org.xfce.panel.genericslider
 X-XFCE-Module=generic-slider
 X-XFCE-Internal=false

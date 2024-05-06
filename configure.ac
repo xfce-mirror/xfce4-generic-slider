@@ -7,21 +7,15 @@ dnl
 dnl ***************************
 dnl *** Version information ***
 dnl ***************************
-m4_define([genericslider_version_major], [1])
-m4_define([genericslider_version_minor], [0])
-m4_define([genericslider_version_micro], [0])
-m4_define([genericslider_version_nano],  []) dnl leave this empty to have no nano version
-m4_define([genericslider_version_build], [@REVISION@])
-m4_define([genericslider_version_tag], [git])
-m4_define([genericslider_version], [genericslider_version_major().genericslider_version_minor().genericslider_version_micro()ifelse(genericslider_version_nano(), [], [], [.genericslider_version_nano()])ifelse(genericslider_version_tag(), [git], [genericslider_version_tag()-genericslider_version_build()], [genericslider_version_tag()])])
+XDT_VERSION_INIT([1.0.0], [git])
 
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
 AC_COPYRIGHT([Copyright (c) 2009-2023 The Xfce development team. All rights reserved.])
-AC_INIT([xfce4-generic-slider], [genericslider_version], [https://gitlab.xfce.org/panel-plugins/xfce4-generic-slider], [xfce4-generic-slider])
-AC_PREREQ([2.50])
-AC_REVISION([xfce4_panel_version_build])
+AC_INIT([xfce4-generic-slider], [xdt_version], [https://gitlab.xfce.org/panel-plugins/xfce4-generic-slider], [xfce4-generic-slider])
+AC_PREREQ([2.69])
+AC_REVISION([xdt_version_build])
 AC_CONFIG_MACRO_DIRS([m4])
 
 dnl ***************************
@@ -45,7 +39,6 @@ AC_PROG_CC()
 AC_PROG_CC_C_O()
 LT_PATH_LD([])
 AC_PROG_INSTALL()
-IT_PROG_INTLTOOL([0.35.0])
 
 dnl **********************************
 dnl *** Check for standard headers ***
@@ -58,12 +51,11 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 dnl ******************************
 dnl *** Check for i18n support ***
 dnl ******************************
-XDT_I18N([@LINGUAS@])
-
-dnl *******************************
-dnl *** Check for X11 installed ***
-dnl *******************************
-XDT_CHECK_LIBX11_REQUIRE()
+GETTEXT_PACKAGE="$PACKAGE"
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Name of default gettext domain])
+AC_SUBST([GETTEXT_PACKAGE])
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.19.8])
 
 dnl ***********************************
 dnl *** Check for required packages ***
@@ -76,7 +68,7 @@ XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.12.0])
 dnl ***********************************
 dnl *** Check for debugging support ***
 dnl ***********************************
-XDT_FEATURE_DEBUG()
+XDT_FEATURE_DEBUG([xdt_debug_default])
 
 dnl *********************************
 dnl *** Substitute platform flags ***
