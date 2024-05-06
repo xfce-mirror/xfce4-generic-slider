@@ -15,7 +15,7 @@ aclocal.m4
 autom4te.cache
 compile
 config*
-!configure.ac.in
+!configure.ac
 depcomp
 install-sh
 libtool
