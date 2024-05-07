@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-generic-slider package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2023
 # Nick Schermer <nick@xfce.org>, 2023
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2023
+# Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-07 00:59+0200\n"
+"Project-Id-Version: xfce-panel-plugins.xfce4-generic-slider\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-05-07 12:59+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
-"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2023\n"
+"Last-Translator: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 2024\n"
 "Language-Team: Japanese (https://app.transifex.com/xfce/teams/16840/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,65 +23,69 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../panel-plugin/generic-slider.c:14
-msgid "Slider"
-msgstr "スライダー"
-
-#: ../panel-plugin/generic-slider.c:15
-msgid "Label"
-msgstr "ラベル"
-
-#: ../panel-plugin/generic-slider.c:16
-msgid "Both"
-msgstr "両方"
-
-#: ../panel-plugin/generic-slider.c:462
+#: panel-plugin/generic-slider.desktop.in:5 panel-plugin/generic-slider.c:462
 msgid "Generic Slider"
 msgstr "基本スライダー"
 
-#: ../panel-plugin/generic-slider.c:462
+#: panel-plugin/generic-slider.desktop.in:6
+msgid "Passes a value to a command"
+msgstr "コマンドに値を渡す"
+
+#: panel-plugin/generic-slider.c:14
+msgid "Slider"
+msgstr "スライダー"
+
+#: panel-plugin/generic-slider.c:15
+msgid "Label"
+msgstr "ラベル"
+
+#: panel-plugin/generic-slider.c:16
+msgid "Both"
+msgstr "両方"
+
+#: panel-plugin/generic-slider.c:462
 msgid "Close"
 msgstr "閉じる"
 
-#: ../panel-plugin/generic-slider.c:470
+#: panel-plugin/generic-slider.c:470
 msgid "Adjust this command:"
 msgstr "このコマンドを調整する:"
 
-#: ../panel-plugin/generic-slider.c:471
+#: panel-plugin/generic-slider.c:471
 msgid "Denominator for adjusting:"
 msgstr "調整の基準:"
 
-#: ../panel-plugin/generic-slider.c:472
+#: panel-plugin/generic-slider.c:472
 msgid "Synchronize with this command:"
 msgstr "このコマンドで同期する:"
 
-#: ../panel-plugin/generic-slider.c:473
+#: panel-plugin/generic-slider.c:473
 msgid "Denominator for synchronizing:"
 msgstr "同期の基準:"
 
-#: ../panel-plugin/generic-slider.c:474
+#: panel-plugin/generic-slider.c:474
 msgid "Label for slider:"
 msgstr "スライダーのラベル:"
 
-#: ../panel-plugin/generic-slider.c:475
+#: panel-plugin/generic-slider.c:475
 msgid "Denominator for label:"
 msgstr "ラベルの基準:"
 
-#: ../panel-plugin/generic-slider.c:485 ../panel-plugin/generic-slider.c:486
-#: ../panel-plugin/generic-slider.c:487
+#: panel-plugin/generic-slider.c:485 panel-plugin/generic-slider.c:486
+#: panel-plugin/generic-slider.c:487
 msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr "%v は 0 から基準までの値、%d は前回の更新以降の変更"
 
-#: ../panel-plugin/generic-slider.c:538
+#: panel-plugin/generic-slider.c:538
 msgid "Use default color"
 msgstr "デフォルトの色を使用する"
 
-#: ../panel-plugin/generic-slider.c:551
+#: panel-plugin/generic-slider.c:551
 msgid "Show:"
 msgstr "表示:"
 
-#: ../panel-plugin/generic-slider.c:552
+#: panel-plugin/generic-slider.c:552
 msgid "Color:"
 msgstr "色:"
