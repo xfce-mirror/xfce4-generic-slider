@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-30 00:53+0200\n"
+"POT-Creation-Date: 2024-05-07 00:59+0200\n"
 "PO-Revision-Date: 2023-05-06 10:09+0000\n"
 "Last-Translator: scootergrisen, 2023\n"
 "Language-Team: Danish (https://app.transifex.com/xfce/teams/16840/da/)\n"
@@ -21,15 +21,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../panel-plugin/generic-slider.desktop.in.h:1
-#: ../panel-plugin/generic-slider.c:462
-msgid "Generic Slider"
-msgstr "Generisk skyder"
-
-#: ../panel-plugin/generic-slider.desktop.in.h:2
-msgid "Passes a value to a command"
-msgstr "Videregiver en værdi til en kommando"
 
 #: ../panel-plugin/generic-slider.c:14
 msgid "Slider"
@@ -42,6 +33,10 @@ msgstr "Etiket"
 #: ../panel-plugin/generic-slider.c:16
 msgid "Both"
 msgstr "Begge"
+
+#: ../panel-plugin/generic-slider.c:462
+msgid "Generic Slider"
+msgstr "Generisk skyder"
 
 #: ../panel-plugin/generic-slider.c:462
 msgid "Close"
