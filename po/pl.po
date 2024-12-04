@@ -76,7 +76,7 @@ msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr ""
-"%v dla wartości między 0 a mianownikiem, %d dla zmiany od ostatniej "
+"%v dla wartości między 0 a mianownikiem, %d dla zmiany od ostatniej "
 "aktualizacji"
 
 #: panel-plugin/generic-slider.c:538
