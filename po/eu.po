@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-generic-slider package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Nick Schermer <nick@xfce.org>, 2023
+# Eder Etxebarria Rojo, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-generic-slider\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-05-07 12:59+0200\n"
+"PO-Revision-Date: 2023-05-06 10:09+0000\n"
+"Last-Translator: Eder Etxebarria Rojo, 2024\n"
+"Language-Team: Basque (https://app.transifex.com/xfce/teams/16840/eu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: eu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: panel-plugin/generic-slider.desktop.in:5 panel-plugin/generic-slider.c:462
+msgid "Generic Slider"
+msgstr "Kontrol irristakor generikoa"
+
+#: panel-plugin/generic-slider.desktop.in:6
+msgid "Passes a value to a command"
+msgstr "Balio bat komandora itzultzen du"
+
+#: panel-plugin/generic-slider.c:14
+msgid "Slider"
+msgstr "Kontrol irristakorra"
+
+#: panel-plugin/generic-slider.c:15
+msgid "Label"
+msgstr "Etiketa"
+
+#: panel-plugin/generic-slider.c:16
+msgid "Both"
+msgstr "Biak"
+
+#: panel-plugin/generic-slider.c:462
+msgid "Close"
+msgstr "Itxi"
+
+#: panel-plugin/generic-slider.c:470
+msgid "Adjust this command:"
+msgstr "Doitu honako komandoa:"
+
+#: panel-plugin/generic-slider.c:471
+msgid "Denominator for adjusting:"
+msgstr "Doitzeko izendatzailea:"
+
+#: panel-plugin/generic-slider.c:472
+msgid "Synchronize with this command:"
+msgstr "Honako komandoarekin sinkronizatu:"
+
+#: panel-plugin/generic-slider.c:473
+msgid "Denominator for synchronizing:"
+msgstr "Sinkronizatzeko izendatzailea:"
+
+#: panel-plugin/generic-slider.c:474
+msgid "Label for slider:"
+msgstr "Etiketa kontrol irristakorrarentzat:"
+
+#: panel-plugin/generic-slider.c:475
+msgid "Denominator for label:"
+msgstr "Izendatzailea etiketarentzat:"
+
+#: panel-plugin/generic-slider.c:485 panel-plugin/generic-slider.c:486
+#: panel-plugin/generic-slider.c:487
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v 0 eta izendatzailearen arteko balioentzat, %daldaketarentzat azken "
+"eguneraketatik"
+
+#: panel-plugin/generic-slider.c:538
+msgid "Use default color"
+msgstr "Erabili kolore lehenetsia"
+
+#: panel-plugin/generic-slider.c:551
+msgid "Show:"
+msgstr "Erakutsi:"
+
+#: panel-plugin/generic-slider.c:552
+msgid "Color:"
+msgstr "Kolorea:"
