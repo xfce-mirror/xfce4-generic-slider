@@ -459,7 +459,7 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	generic_slider -> active = 0;
 	xfce_panel_plugin_block_menu(plugin);
 	
-	dialog = xfce_titled_dialog_new_with_buttons(_("Generic Slider"), GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(plugin))), GTK_DIALOG_DESTROY_WITH_PARENT, _("Close"), GTK_RESPONSE_OK, NULL);
+	dialog = xfce_titled_dialog_new_with_mixed_buttons(_("Generic Slider"), GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(plugin))), GTK_DIALOG_DESTROY_WITH_PARENT, "window-close-symbolic", _("Close"), GTK_RESPONSE_OK, NULL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_icon_name(GTK_WINDOW(dialog), "xfce4-settings");
 	
