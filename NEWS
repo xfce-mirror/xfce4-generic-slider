@@ -1,3 +1,24 @@
+1.0.1 (2024-12-24)
+=====
+- Update copyright year
+- build: Bump dependency versions and fix deprecation warnings
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- I18n: Update po/LINGUAS list
+- build: Remove unnecessary check for bind_textdomain_codeset
+- build: Remove unnecessary check for libx11
+- build: Use XDT_VERSION_INIT and get rid of configure.ac.in
+- build: Switch from intltool to gettext
+- Translation Updates:
+  Albanian, Basque, Bulgarian, Catalan, Chinese (China), Chinese
+  (Taiwan), Czech, Danish, Dutch, English (United Kingdom), Finnish,
+  French, Galician, German, Hebrew, Italian, Japanese, Korean,
+  Lithuanian, Norwegian Bokmål, Polish, Portuguese, Portuguese
+  (Brazil), Romanian, Russian, Serbian, Slovenian, Spanish, Swedish,
+  Turkish, Ukrainian
+
 1.0.0 (2023-05-26)
 =====
 - Keep original svg with exported png also in 128x128
