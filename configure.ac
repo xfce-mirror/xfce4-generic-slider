@@ -12,7 +12,7 @@ XDT_VERSION_INIT([1.0.0], [git])
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2009-2023 The Xfce development team. All rights reserved.])
+AC_COPYRIGHT([Copyright (c) 2009-2024 The Xfce development team. All rights reserved.])
 AC_INIT([xfce4-generic-slider], [xdt_version], [https://gitlab.xfce.org/panel-plugins/xfce4-generic-slider], [xfce4-generic-slider])
 AC_PREREQ([2.69])
 AC_REVISION([xdt_version_build])
