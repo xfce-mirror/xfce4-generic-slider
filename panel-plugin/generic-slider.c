@@ -1,6 +1,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#ifdef HAVE_XFCE_REVISION_H
+#include "xfce-revision.h"
+#endif
 
 #include <stdlib.h>
 #include <string.h>
@@ -617,6 +620,18 @@ static void generic_slider_free_data(XfcePanelPlugin *plugin, Generic_Slider *ge
 	g_free(generic_slider);
 }
 
+static void generic_slider_show_about(XfcePanelPlugin *plugin, Generic_Slider *generic_slider) {
+	gtk_show_about_dialog (NULL,
+		"logo-icon-name", "org.xfce.panel.genericslider",
+		"license", xfce_get_license_text (XFCE_LICENSE_TEXT_GPL),
+		"version", VERSION_FULL,
+		"program-name", PACKAGE_NAME,
+		"comments", _("Passes a value to a command"),
+		"website", PACKAGE_URL,
+		"copyright", "Copyright \302\251 2009-" COPYRIGHT_YEAR " The Xfce development team",
+		NULL);
+}
+
 static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	Generic_Slider *generic_slider = calloc(1, sizeof(Generic_Slider));
 	GtkWidget *event_box;
@@ -672,12 +687,14 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	gtk_box_pack_start(GTK_BOX(box), event_box, FALSE, FALSE, 0);
 	
 	xfce_panel_plugin_menu_show_configure (plugin);
+	xfce_panel_plugin_menu_show_about (plugin);
 	
 	g_signal_connect(plugin, "orientation-changed", G_CALLBACK(generic_slider_orientation_changed), generic_slider);
 	g_signal_connect(plugin, "configure-plugin", G_CALLBACK(generic_slider_properties_dialog), generic_slider);
 	g_signal_connect(plugin, "size-changed", G_CALLBACK(generic_slider_set_size), NULL);
 	g_signal_connect(plugin, "free-data", G_CALLBACK(generic_slider_free_data), generic_slider);
 	g_signal_connect(plugin, "save", G_CALLBACK(generic_slider_write_rc_file), generic_slider);
+	g_signal_connect(plugin, "about", G_CALLBACK (generic_slider_show_about), generic_slider);
 	
 	gtk_container_add(GTK_CONTAINER(plugin), box);
 	xfce_panel_plugin_add_action_widget(plugin, box);
