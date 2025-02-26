@@ -1,5 +1,6 @@
 plugin_sources = [
   'generic-slider.c',
+  xfce_revision_h,
 ]
 
 plugin_install_subdir = 'xfce4' / 'panel' / 'plugins'
