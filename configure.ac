@@ -8,15 +8,20 @@ dnl ***************************
 dnl *** Version information ***
 dnl ***************************
 XDT_VERSION_INIT([1.0.1], [git])
+m4_define([copyright_year], [2025])
 
 dnl ***************************
 dnl *** Initialize autoconf ***
 dnl ***************************
-AC_COPYRIGHT([Copyright (c) 2009-2024 The Xfce development team. All rights reserved.])
+AC_COPYRIGHT([Copyright (c) 2009-copyright_year() The Xfce development team. All rights reserved.])
 AC_INIT([xfce4-generic-slider], [xdt_version], [https://gitlab.xfce.org/panel-plugins/xfce4-generic-slider], [xfce4-generic-slider])
 AC_PREREQ([2.69])
 AC_REVISION([xdt_version_build])
 AC_CONFIG_MACRO_DIRS([m4])
+AC_DEFINE([VERSION_FULL], [PACKAGE_VERSION], [Alias for VERSION and PACKAGE_VERSION for meson compatibility])
+COPYRIGHT_YEAR=copyright_year()
+AC_DEFINE_UNQUOTED([COPYRIGHT_YEAR], ["$COPYRIGHT_YEAR"], [Copyright year])
+AC_SUBST([COPYRIGHT_YEAR])
 
 dnl ***************************
 dnl *** Initialize automake ***
@@ -61,6 +66,7 @@ dnl ***********************************
 XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.50.0])
 XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.22.0])
 XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.16.0])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.16.0])
 XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.16.0])
 
 dnl ***********************************
