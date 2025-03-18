@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-generic-slider package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Priit Jõerüüt <transifex@joeruut.com>, 2025
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-generic-slider\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-05-07 12:59+0200\n"
+"PO-Revision-Date: 2023-05-06 10:09+0000\n"
+"Last-Translator: Priit Jõerüüt <transifex@joeruut.com>, 2025\n"
+"Language-Team: Estonian (https://app.transifex.com/xfce/teams/16840/et/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: panel-plugin/generic-slider.desktop.in:5 panel-plugin/generic-slider.c:462
+msgid "Generic Slider"
+msgstr "Üldine liugur"
+
+#: panel-plugin/generic-slider.desktop.in:6
+msgid "Passes a value to a command"
+msgstr "Annab väärtuse käsule edasi"
+
+#: panel-plugin/generic-slider.c:14
+msgid "Slider"
+msgstr "Liugur"
+
+#: panel-plugin/generic-slider.c:15
+msgid "Label"
+msgstr "Silt"
+
+#: panel-plugin/generic-slider.c:16
+msgid "Both"
+msgstr "Mõlemad"
+
+#: panel-plugin/generic-slider.c:462
+msgid "Close"
+msgstr "Sulge"
+
+#: panel-plugin/generic-slider.c:470
+msgid "Adjust this command:"
+msgstr "Kohenda seda käsku:"
+
+#: panel-plugin/generic-slider.c:471
+msgid "Denominator for adjusting:"
+msgstr "Ühisnimetaja kohendamiseks:"
+
+#: panel-plugin/generic-slider.c:472
+msgid "Synchronize with this command:"
+msgstr "Sünkroniseeri selle käsuga:"
+
+#: panel-plugin/generic-slider.c:473
+msgid "Denominator for synchronizing:"
+msgstr "Ühisnimetaja sünkroniseerimiseks:"
+
+#: panel-plugin/generic-slider.c:474
+msgid "Label for slider:"
+msgstr "Liuguri silt:"
+
+#: panel-plugin/generic-slider.c:475
+msgid "Denominator for label:"
+msgstr "Sildi ühisnimetaja:"
+
+#: panel-plugin/generic-slider.c:485 panel-plugin/generic-slider.c:486
+#: panel-plugin/generic-slider.c:487
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v väärtuse jaoks 0 ühisnimetaja vahel, %d muutusteks viimasest uuendusest"
+
+#: panel-plugin/generic-slider.c:538
+msgid "Use default color"
+msgstr "Kasuta vaikimisi värvi"
+
+#: panel-plugin/generic-slider.c:551
+msgid "Show:"
+msgstr "Näita:"
+
+#: panel-plugin/generic-slider.c:552
+msgid "Color:"
+msgstr "Värv:"
