@@ -17,6 +17,8 @@ libgeneric_slider_la_SOURCES = \
 	generic-slider.c
 
 libgeneric_slider_la_CFLAGS = \
+	$(GLIB_CFLAGS) \
+	$(GTK_CFLAGS) \
 	$(LIBXFCE4UTIL_CFLAGS) \
 	$(LIBXFCE4UI_CFLAGS) \
 	$(LIBXFCE4PANEL_CFLAGS) \
@@ -30,9 +32,11 @@ libgeneric_slider_la_LDFLAGS = \
        $(PLATFORM_LDFLAGS)
 
 libgeneric_slider_la_LIBADD = \
+	$(GLIB_LIBS) \
+	$(GTK_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
 	$(LIBXFCE4UI_LIBS) \
-        $(LIBXFCE4PANEL_LIBS)
+	$(LIBXFCE4PANEL_LIBS)
 
 #
 # Desktop file
