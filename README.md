@@ -12,9 +12,9 @@ To clone the source tree and build the package, you need the Xfce development li
 
     % git clone https://gitlab.xfce.org/panel-plugins/xfce4-generic-slider.git
     % cd xfce4-generic-slider
-    % ./autogen.sh
-    % make
-    % make install
+    % meson setup build
+    % meson compile -C build
+    % meson install -C build
 
 Be sure to specify an installation prefix / DESTDIR so that it goes to the right place.
 
