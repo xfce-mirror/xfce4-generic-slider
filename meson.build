@@ -1,7 +1,7 @@
 project(
   'xfce4-generic-slider',
   'c',
-version : '1.1.0',
+version : '1.1.0-dev',
   license : 'GPL-3.0-or-later',
   meson_version : '>= 0.54.0',
   default_options : ['c_std=gnu11', 'buildtype=debugoptimized', 'warning_level=2']
