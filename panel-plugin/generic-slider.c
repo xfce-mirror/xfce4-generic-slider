@@ -21,6 +21,7 @@
 
 typedef struct generic_slider {
 	GtkWidget *slider;
+	GtkWidget *settings_dialog;
 	GtkWidget *label;
 	GdkRGBA color;
 	GtkCssProvider *css_provider;
@@ -329,7 +330,6 @@ static void generic_slider_properties_dialog_response(GtkWidget *dialog, gint re
 	Generic_Slider *generic_slider = stupid_hack -> data;
 	XfcePanelPlugin *plugin = stupid_hack -> next -> data;
 	
-	xfce_panel_plugin_unblock_menu(plugin);
 	gtk_widget_destroy(dialog);
 	
 	generic_slider_write_rc_file(plugin, generic_slider);
@@ -454,6 +454,11 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	GtkWidget *spin_2;
 	GtkWidget *spin_3;
 	
+	if (generic_slider -> settings_dialog != NULL) {
+		gtk_window_present(GTK_WINDOW(generic_slider -> settings_dialog));
+		return;
+	}
+
 	/* Using pointers to give a one argument function two arguments is a stupid hack.
 	 * I still stand by that.
 	 */
@@ -461,9 +466,9 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	
 	/* We don't want the slider invoking a nonexistent command while the command is being changed */
 	generic_slider -> active = 0;
-	xfce_panel_plugin_block_menu(plugin);
 	
-	dialog = xfce_titled_dialog_new_with_mixed_buttons(_("Generic Slider"), GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(plugin))), GTK_DIALOG_DESTROY_WITH_PARENT, "window-close-symbolic", _("Close"), GTK_RESPONSE_OK, NULL);
+	generic_slider -> settings_dialog = dialog = xfce_titled_dialog_new_with_mixed_buttons(_("Generic Slider"), GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(plugin))), GTK_DIALOG_DESTROY_WITH_PARENT, "window-close-symbolic", _("Close"), GTK_RESPONSE_OK, NULL);
+	g_object_add_weak_pointer(G_OBJECT(dialog), (gpointer *)&generic_slider -> settings_dialog);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_icon_name(GTK_WINDOW(dialog), "xfce4-settings");
 	
