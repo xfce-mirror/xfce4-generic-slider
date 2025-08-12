@@ -18,6 +18,10 @@ To clone the source tree and build the package, you need the Xfce development li
 
 Be sure to specify an installation prefix / DESTDIR so that it goes to the right place.
 
+### Uninstallation
+
+    % ninja uninstall -C build
+
 ## Configuration
 
 Once xfce4-generic-slider is running in your panel, you can change the color of the slider and set whether a label appears beside it. To actually use it, you need to setup three references to the variable you're interested in. Here's an example of how to make a slider for the volume.
