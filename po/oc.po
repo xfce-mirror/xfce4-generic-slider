@@ -24,7 +24,7 @@ msgstr ""
 
 #: panel-plugin/generic-slider.desktop.in:5 panel-plugin/generic-slider.c:462
 msgid "Generic Slider"
-msgstr ""
+msgstr "Desplaçador generic"
 
 #: panel-plugin/generic-slider.desktop.in:6
 msgid "Passes a value to a command"
@@ -32,7 +32,7 @@ msgstr "Passa una valor a una comanda"
 
 #: panel-plugin/generic-slider.c:14
 msgid "Slider"
-msgstr ""
+msgstr "Desplaçador"
 
 #: panel-plugin/generic-slider.c:15
 msgid "Label"
@@ -52,7 +52,7 @@ msgstr "Ajustar aquesta comanda :"
 
 #: panel-plugin/generic-slider.c:471
 msgid "Denominator for adjusting:"
-msgstr ""
+msgstr "Denominador per ajustar :"
 
 #: panel-plugin/generic-slider.c:472
 msgid "Synchronize with this command:"
@@ -60,15 +60,15 @@ msgstr "Sincronizar amb aquesta comanda :"
 
 #: panel-plugin/generic-slider.c:473
 msgid "Denominator for synchronizing:"
-msgstr ""
+msgstr "Denominador per sincronizar :"
 
 #: panel-plugin/generic-slider.c:474
 msgid "Label for slider:"
-msgstr ""
+msgstr "Etiqueta del desplaçador :"
 
 #: panel-plugin/generic-slider.c:475
 msgid "Denominator for label:"
-msgstr ""
+msgstr "Denominador per l’etiqueta :"
 
 #: panel-plugin/generic-slider.c:485 panel-plugin/generic-slider.c:486
 #: panel-plugin/generic-slider.c:487
@@ -76,6 +76,8 @@ msgid ""
 "%v for value between 0 and the denominator, %d for the change since last "
 "update"
 msgstr ""
+"%v per la valor entre 0 e lo denominador, %d pel cambiament dempuèi darrièra"
+" actualizacion"
 
 #: panel-plugin/generic-slider.c:538
 msgid "Use default color"
