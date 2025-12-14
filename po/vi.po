@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Xfce
+# This file is distributed under the same license as the xfce-panel-plugins.xfce4-generic-slider package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Cas Pascal <casboi86@gmail.com>, 2025
+# Loc Huynh, 2025
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-panel-plugins.xfce4-generic-slider\n"
+"Report-Msgid-Bugs-To: https://gitlab.xfce.org/\n"
+"POT-Creation-Date: 2024-05-07 12:59+0200\n"
+"PO-Revision-Date: 2023-05-06 10:09+0000\n"
+"Last-Translator: Loc Huynh, 2025\n"
+"Language-Team: Vietnamese (https://app.transifex.com/xfce/teams/16840/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: panel-plugin/generic-slider.desktop.in:5 panel-plugin/generic-slider.c:462
+msgid "Generic Slider"
+msgstr "Thanh trượt"
+
+#: panel-plugin/generic-slider.desktop.in:6
+msgid "Passes a value to a command"
+msgstr "Đưa giá trị vào một lệnh"
+
+#: panel-plugin/generic-slider.c:14
+msgid "Slider"
+msgstr "Thanh trượt"
+
+#: panel-plugin/generic-slider.c:15
+msgid "Label"
+msgstr "Nhãn"
+
+#: panel-plugin/generic-slider.c:16
+msgid "Both"
+msgstr "Cả hai"
+
+#: panel-plugin/generic-slider.c:462
+msgid "Close"
+msgstr "Đóng"
+
+#: panel-plugin/generic-slider.c:470
+msgid "Adjust this command:"
+msgstr "Điều chỉnh lệnh này:"
+
+#: panel-plugin/generic-slider.c:471
+msgid "Denominator for adjusting:"
+msgstr "Mẫu số để điều chỉnh:"
+
+#: panel-plugin/generic-slider.c:472
+msgid "Synchronize with this command:"
+msgstr "Đồng bộ hóa bằng lệnh này:"
+
+#: panel-plugin/generic-slider.c:473
+msgid "Denominator for synchronizing:"
+msgstr "Mẫu số để đồng bộ hóa:"
+
+#: panel-plugin/generic-slider.c:474
+msgid "Label for slider:"
+msgstr "Nhãn cho thanh trượt:"
+
+#: panel-plugin/generic-slider.c:475
+msgid "Denominator for label:"
+msgstr "Mẫu số cho nhãn:"
+
+#: panel-plugin/generic-slider.c:485 panel-plugin/generic-slider.c:486
+#: panel-plugin/generic-slider.c:487
+msgid ""
+"%v for value between 0 and the denominator, %d for the change since last "
+"update"
+msgstr ""
+"%v cho giá trị từ 0 đến mẫu số, %d cho thay đổi kể từ lần cập nhật cuối cùng"
+
+#: panel-plugin/generic-slider.c:538
+msgid "Use default color"
+msgstr "Sử dụng màu mặc định"
+
+#: panel-plugin/generic-slider.c:551
+msgid "Show:"
+msgstr "Trình diễn:"
+
+#: panel-plugin/generic-slider.c:552
+msgid "Color:"
+msgstr "Màu sắc:"
