@@ -506,9 +506,9 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	spin_1 = gtk_spin_button_new(adjustment_1, 0.5, 0);
 	spin_2 = gtk_spin_button_new(adjustment_2, 0.5, 0);
 	spin_3 = gtk_spin_button_new(adjustment_3, 0.5, 0);
-	g_signal_connect(G_OBJECT(adjustment_1), "value_changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> adjust_denominator));
-	g_signal_connect(G_OBJECT(adjustment_2), "value_changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> sync_denominator));
-	g_signal_connect(G_OBJECT(adjustment_3), "value_changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> description_denominator));
+	g_signal_connect(G_OBJECT(adjustment_1), "value-changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> adjust_denominator));
+	g_signal_connect(G_OBJECT(adjustment_2), "value-changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> sync_denominator));
+	g_signal_connect(G_OBJECT(adjustment_3), "value-changed", G_CALLBACK(generic_slider_update_denominators), &(generic_slider -> description_denominator));
 	table = gtk_grid_new();
 	gtk_grid_set_row_spacing(GTK_GRID(table), 2);
 	gtk_grid_set_column_spacing(GTK_GRID(table), 6);
