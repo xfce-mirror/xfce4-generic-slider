@@ -641,7 +641,7 @@ static void generic_slider_show_about(XfcePanelPlugin *plugin, Generic_Slider *g
 }
 
 static void generic_slider_construct(XfcePanelPlugin *plugin) {
-	Generic_Slider *generic_slider = calloc(1, sizeof(Generic_Slider));
+	Generic_Slider *generic_slider = g_new0(Generic_Slider, 1);
 	GtkWidget *event_box;
 	GtkWidget *slider;
 	GtkWidget *label;
@@ -667,9 +667,9 @@ static void generic_slider_construct(XfcePanelPlugin *plugin) {
 	generic_slider -> mode = 0;
 	generic_slider -> slider = slider;
 	generic_slider -> label = label;
-	generic_slider -> description = calloc(1, sizeof(char));
-	generic_slider -> adjust_command = calloc(1, sizeof(char));
-	generic_slider -> sync_command = calloc(1, sizeof(char));
+	generic_slider -> description = g_strdup("");
+	generic_slider -> adjust_command = g_strdup("");
+	generic_slider -> sync_command = g_strdup("");
 	generic_slider -> css_provider = gtk_css_provider_new();
 	gdk_rgba_parse(&(generic_slider -> color), "blue");
 	
