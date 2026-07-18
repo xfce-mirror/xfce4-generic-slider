@@ -494,9 +494,9 @@ static void generic_slider_properties_dialog(XfcePanelPlugin *plugin, Generic_Sl
 	gtk_widget_set_name(entry_1, "A");
 	gtk_widget_set_name(entry_2, "B");
 	gtk_widget_set_name(entry_3, "C");
-	gtk_entry_set_text(GTK_ENTRY(entry_1), g_strdup(generic_slider -> adjust_command));
-	gtk_entry_set_text(GTK_ENTRY(entry_2), g_strdup(generic_slider -> sync_command));
-	gtk_entry_set_text(GTK_ENTRY(entry_3), g_strdup(generic_slider -> description));
+	gtk_entry_set_text(GTK_ENTRY(entry_1), generic_slider -> adjust_command);
+	gtk_entry_set_text(GTK_ENTRY(entry_2), generic_slider -> sync_command);
+	gtk_entry_set_text(GTK_ENTRY(entry_3), generic_slider -> description);
 	g_signal_connect(G_OBJECT(entry_1), "changed", G_CALLBACK(generic_slider_update_commands), generic_slider);
 	g_signal_connect(G_OBJECT(entry_2), "changed", G_CALLBACK(generic_slider_update_commands), generic_slider);
 	g_signal_connect(G_OBJECT(entry_3), "changed", G_CALLBACK(generic_slider_update_commands), generic_slider);
