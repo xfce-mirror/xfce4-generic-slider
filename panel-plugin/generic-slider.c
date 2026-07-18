@@ -91,15 +91,22 @@ static gint timer_cb(Generic_Slider *generic_slider) {
 	
 	if ((generic_slider -> active) && (strcmp(generic_slider -> sync_command, "") != 0)) {
 		generic_slider -> active = 0;
-		char *label_text;
+
 		char *path = parse_command(generic_slider -> sync_command, (generic_slider -> sync_denominator) * (generic_slider -> value), (generic_slider -> sync_denominator) * (generic_slider -> delta));
 		FILE *stream = popen(path, "r");
+		if (stream == NULL) {
+			g_critical("Failed to open file %s", path);
+			g_free(path);
+			return FALSE;
+		}
+		g_free(path);
+
+		char *label_text;
 		int new_value = 0;
 		unsigned int i;
 		int c;
 		
 		repetition++;
-		g_free(path);
 		
 		/* Gets the output of the command knowing that numbers are 48 less than their ASCII equivalents */
 		for (i = 0; i < 3; i++) {
