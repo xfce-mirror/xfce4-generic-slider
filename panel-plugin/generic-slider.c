@@ -45,7 +45,7 @@ static char *parse_command(char *primitive, int value, int delta) {
 	unsigned int numvs = 0;
 	unsigned int i;
 	
-	if (!strcmp(primitive, "")) {
+	if (strcmp(primitive, "") == 0) {
 		/* Functions that free this string later need something to free */
 		command = g_strdup("");
 		return command;
@@ -89,7 +89,7 @@ static char *parse_command(char *primitive, int value, int delta) {
 static gint timer_cb(Generic_Slider *generic_slider) {
 	static int repetition = 0;
 	
-	if ((generic_slider -> active) && (strcmp(generic_slider -> sync_command, ""))) {
+	if ((generic_slider -> active) && (strcmp(generic_slider -> sync_command, "") != 0)) {
 		generic_slider -> active = 0;
 		char *label_text;
 		char *path = parse_command(generic_slider -> sync_command, (generic_slider -> sync_denominator) * (generic_slider -> value), (generic_slider -> sync_denominator) * (generic_slider -> delta));
@@ -375,11 +375,11 @@ static void generic_slider_update_mode(GtkToggleButton *radio, Generic_Slider *g
 	box = gtk_widget_get_ancestor(generic_slider -> slider, GTK_TYPE_BOX);
 	gtk_widget_show_all(box);
 	
-	if (!strcmp(gtk_button_get_label(GTK_BUTTON(radio)), RADIO_LABEL_1)) {
+	if (strcmp(gtk_button_get_label(GTK_BUTTON(radio)), RADIO_LABEL_1) == 0) {
 		/* Only the slider should be shown */
 		generic_slider -> mode = 1;
 		gtk_widget_hide(generic_slider -> label);
-	} else if (!strcmp(gtk_button_get_label(GTK_BUTTON(radio)), RADIO_LABEL_2)) {
+	} else if (strcmp(gtk_button_get_label(GTK_BUTTON(radio)), RADIO_LABEL_2) == 0) {
 		/* Only the label should be shown */
 		generic_slider -> mode = 2;
 		gtk_widget_hide(generic_slider -> slider);
