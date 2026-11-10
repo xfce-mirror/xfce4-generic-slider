@@ -406,11 +406,11 @@ static void generic_slider_update_commands(GtkWidget *entry, Generic_Slider *gen
 	
 	name = gtk_widget_get_name(entry);
 	
-	if (!strncmp(name, "A", 1)) {
+	if (strncmp(name, "A", 1) == 0) {
 		/* We're changing the command to adjust */
 		g_free(generic_slider -> adjust_command);
 		generic_slider -> adjust_command = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-	} else if (!strncmp(name, "B", 1)) {
+	} else if (strncmp(name, "B", 1) == 0) {
 		/* We're changing the command with which to synchronize */
 		g_free(generic_slider -> sync_command);
 		generic_slider -> sync_command = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
